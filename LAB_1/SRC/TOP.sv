@@ -53,34 +53,38 @@ module top_level (
         end else begin
             state <= next_state;
             case (state)
-                LOAD_DATA: begin
+                LOAD_DATA: begin                                // Load Data from Switches 
                     READ_MODE <= 1'b0;
                     data_buffer <= SWITCHES;
                     next_state <= CALC_CRC;
+                    calculated_crc <= 16'h0000;
+                    bit_counter <= 5'd0;
                 end
 
-                CALC_CRC: begin
+                CALC_CRC: begin                                             // Push the data into the CRC Calculator (16-bits of data)
                     READ_MODE <= 1'b0;
                     DATA_IN <= data_buffer[15];
                     data_buffer <= {data_buffer[14:0], 1'b0};
-                    bit_counter <= bit_counter + 1;
+                    
                     if (bit_counter == 16) begin
                         next_state <= SHIFT_IN_ZEROS;
                         bit_counter <= 0;
+                    end else begin
+                        bit_counter <= bit_counter + 1;
                     end
                 end
 
-                SHIFT_IN_ZEROS: begin
+                SHIFT_IN_ZEROS: begin                                       //Append Zeros being Shifted into the Cell (16-bits of data)
                     READ_MODE <= 1'b0;
                     DATA_IN <= 1'b0;
                     bit_counter <= bit_counter + 1;
-                    if  (bit_counter == 16) begin
+                    if  (bit_counter == 15) begin
                         next_state <= SHIFT_OUT_CRC;
                         bit_counter <= 0;
                     end
                 end
 
-                SHIFT_OUT_CRC: begin
+                SHIFT_OUT_CRC: begin                                        //Shift out the CRC Value from the module
                     READ_MODE <= 1'b1;
                     calculated_crc <= {calculated_crc[14:0], CRC_OUT};
                     bit_counter = bit_counter + 1;
@@ -90,9 +94,10 @@ module top_level (
                     end
                 end
 
-                UPDATE_LEDS: begin
-                    READ_MODE <= 1'b1;
+                UPDATE_LEDS: begin                                          //Update the output LEDs to reflect the new CRC value. 
+                    READ_MODE <= 1'b0;
                     LEDS <= calculated_crc;
+                    
                     next_state <= LOAD_DATA;
                 end
 
