@@ -1,3 +1,12 @@
+# Steps for Simulation
+# xvlog --sv ..\SRC\CRC_CALC.sv ..\SRC\tb_CRC_CALC.sv
+# xelab -debug typical -top tb_CRC_CALC -snapshot crc_tb_snapshot
+# xsim crc_tb_snapshot -R
+
+# This is a simple script to automate the process of compiling and running Verilog file simulatons
+# It is designed to be used with Icarus Verilog (http://iverilog.icarus.com/) and GTKWave (http://gtkwave.sourceforge.net/)
+# It will be changed to use Vivado in the future
+
 import subprocess
 import os
 
