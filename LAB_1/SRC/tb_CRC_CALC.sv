@@ -37,6 +37,7 @@ module tb_CRC_CALC;
     reg [15:0] calculated_crc;
 
     // Initialize the signals
+    
     #10 RESET_N = 1;
 
     // Shift in the string one bit at a time
@@ -46,6 +47,12 @@ module tb_CRC_CALC;
         DATA_IN = b[j];
         #10; // Wait for one clock cycle
       end
+    end
+
+    // Shift in 16 zeros to complete the CRC calculation
+    for (int i = 0; i < 16; i++) begin
+      DATA_IN = 0;
+      #10; // Wait for one clock cycle
     end
 
     // Shift out the calculated CRC

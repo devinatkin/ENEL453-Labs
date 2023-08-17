@@ -38,8 +38,9 @@ module CRC_CALC(
             CRC_OUT <= 1'b0;                                        // Reset the CRC Output to 0
         end else if (READ_MODE) begin                               // If the CRC is in Read Mode, Output the CRC Register, One Bit at a Time
 
-            CRC_REG <= {CRC_REG[14:0], 1'b0};                       // Shift the CRC Register Left by One Bit
             CRC_OUT <= CRC_REG[15];                                 // Output the MSB of the CRC Register
+            CRC_REG <= {CRC_REG[14:0], 1'b0};                       // Shift the CRC Register Left by One Bit
+            
 
         end else begin                                              // If the CRC is in Write Mode, Calculate the CRC Register while Shifting in the Data
 

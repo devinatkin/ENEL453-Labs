@@ -3,13 +3,21 @@
 # SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Thu Aug 17 15:43:55 2023
-# Process ID: 22056
+# Start of session at: Thu Aug 17 15:32:41 2023
+# Process ID: 10020
 # Current directory: C:/Users/devin/Desktop/ENEL453_Labs/LAB_1/SIM
-# Command line: xsim.exe -mode tcl -source {xsim.dir/top_tb_snapshot/xsim_script.tcl}
+# Command line: xsim.exe -source {xsim.dir/top_tb_snapshot/xsim_script.tcl}
 # Log file: C:/Users/devin/Desktop/ENEL453_Labs/LAB_1/SIM/xsim.log
 # Journal file: C:/Users/devin/Desktop/ENEL453_Labs/LAB_1/SIM\xsim.jou
 # Running On: Devin-I2Sense, OS: Windows, CPU Frequency: 2195 MHz, CPU Physical cores: 16, Host memory: 68680 MB
 #-----------------------------------------------------------
+start_gui
 source xsim.dir/top_tb_snapshot/xsim_script.tcl
-run -all
+add_wave {{/tb_top_level/uut/calculated_crc}} 
+run 10 us
+run 10 us
+run 10 us
+add_bp {C:/Users/devin/Desktop/ENEL453_Labs/LAB_1/SRC/TOP.sv} 85
+run 10 us
+run 10 us
+close_sim
