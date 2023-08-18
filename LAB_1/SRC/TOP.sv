@@ -39,7 +39,7 @@ module top_level (
     reg [15:0] calculated_crc;
 
     // State Machine Logic
-    always @(posedge CLK or negedge RESET_N) begin
+    always @(posedge CLK) begin
         if (!RESET_N) begin
             state <= LOAD_DATA;
             next_state <= LOAD_DATA;
