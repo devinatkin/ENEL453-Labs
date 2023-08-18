@@ -1,6 +1,6 @@
 module top_level (
     input CLK,
-    input RESET_N,
+    input RESET,
     input [15:0] SWITCHES,
     output reg [15:0] LEDS
 );
@@ -26,7 +26,7 @@ module top_level (
     // CRC Module Instance
     CRC_CALC crc_calc (
         .CLK(CLK),
-        .RESET_N(RESET_N),
+        .RESET_N(RESET),
         .DATA_IN(DATA_IN),
         .READ_MODE(READ_MODE),
         .CRC_OUT(CRC_OUT)

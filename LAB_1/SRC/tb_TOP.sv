@@ -20,7 +20,7 @@ module tb_top_level;
   // Instantiate the top_level module
   top_level uut (
     .CLK(CLK),
-    .RESET_N(RESET_N),
+    .RESET(RESET_N),
     .SWITCHES(SWITCHES),
     .LEDS(LEDS)
   );
