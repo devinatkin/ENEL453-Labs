@@ -39,3 +39,39 @@ route_design
 write_checkpoint -force post_route
 report_utilization -hierarchical -file utilization_hierarchical.rpt
 write_bitstream bitstream.bit
+connect_hw_server -url devin-laptop:3121
+open_hw_manager
+connect_hw_server -url devin-laptop:3121
+connect_hw_server -url Devin-Laptop:3121
+connect_hw_server -url Devin-Laptop:3121
+connect_hw_server -url 10.13.113.125:3121
+open_hw_target
+open_hw_target
+connect_hw_server -url 10.13.113.125:3121
+close_hw_target
+disconnect_hw_server
+connect_hw_server -url 10.13.113.125:3121
+connect_hw_server -url 10.13.81.70:3121
+list_hw_samples
+open_hw_target
+get_hw_targets
+refresh_hw_server
+refresh_hw_server
+get_hw_targets
+get_hw_targets
+open_hw_target
+program_hw_devices
+create_hw_bitstream
+program_hw_devices
+program_hw_devices bitstream.bit
+create_hw_bitstream bitstream.bit
+program_hw_devices
+create_hw_bitstream -force -hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+program_hw_devices
+create_hw_bitstream -force -hw_device [lindex [get_hw_devices xc7a35t_0] 0] bitstream.bit
+create_hw_bitstream -hw_device [lindex [get_hw_devices xc7a35t_0] 0] bitstream.bit
+program_hw_devices
+program_hw_devices
+program_hw_devices
+program_hw_devices
+program_hw_devices
