@@ -3,7 +3,7 @@ create_project temp_project ./temp_project -part xc7a35tcpg236-1 -in_memory -for
 
 # Add source files (adjust paths and types as needed)
 read_verilog -sv ..\\SRC\\CRC_CALC.sv
-read_verilog -sv 
+read_verilog -sv ..\\SRC\\TOP.sv
 read_xdc ..\\SRC\\Basys3_Lab1_Constraints.xdc
 
 set_property top top_level [current_fileset]
