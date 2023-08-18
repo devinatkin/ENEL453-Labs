@@ -1,0 +1,31 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
+| Date         : Fri Aug 18 11:36:02 2023
+| Host         : Devin-I2Sense running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file utilization_hierarchical.rpt
+| Design       : top_level
+| Device       : xc7a35tcpg236-1
+| Speed File   : -1
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++---------------+----------+------------+------------+---------+------+-----+--------+--------+------------+
+|    Instance   |  Module  | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP Blocks |
++---------------+----------+------------+------------+---------+------+-----+--------+--------+------------+
+| top_level     |    (top) |         40 |         37 |       0 |    3 |  75 |      0 |      0 |          0 |
+|   (top_level) |    (top) |         31 |         31 |       0 |    0 |  61 |      0 |      0 |          0 |
+|   crc_calc    | CRC_CALC |          9 |          6 |       0 |    3 |  14 |      0 |      0 |          0 |
++---------------+----------+------------+------------+---------+------+-----+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

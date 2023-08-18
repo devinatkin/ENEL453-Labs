@@ -3,12 +3,12 @@
 # SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Thu Aug 17 17:20:48 2023
-# Process ID: 5512
-# Current directory: C:/Users/devin/Desktop/ENEL453_Labs/LAB_1/SIM
+# Start of session at: Fri Aug 18 10:36:44 2023
+# Process ID: 12244
+# Current directory: C:/Users/devin/Desktop/ENEL453_Labs
 # Command line: vivado.exe -mode batch -source ..\SRC\create_bitstream.tcl
-# Log file: C:/Users/devin/Desktop/ENEL453_Labs/LAB_1/SIM/vivado.log
-# Journal file: C:/Users/devin/Desktop/ENEL453_Labs/LAB_1/SIM\vivado.jou
+# Log file: C:/Users/devin/Desktop/ENEL453_Labs/vivado.log
+# Journal file: C:/Users/devin/Desktop/ENEL453_Labs\vivado.jou
 # Running On: Devin-I2Sense, OS: Windows, CPU Frequency: 2195 MHz, CPU Physical cores: 16, Host memory: 68680 MB
 #-----------------------------------------------------------
 source {..\SRC\create_bitstream.tcl}

@@ -1,28 +1,33 @@
 # Create a new temporary project
-create_project temp_project ./temp_project -part xc7a35tcpg236-1 -force
+create_project temp_project ./temp_project -part xc7a35tcpg236-1 -in_memory -force
 
 # Add source files (adjust paths and types as needed)
-add_files ..\\SRC\\CRC_CALC.sv
-add_files ..\\SRC\\TOP.sv
-add_files ..\\SRC\\Basys3_Lab1_Constraints.xdc
+read_verilog -sv ..\\SRC\\CRC_CALC.sv
+read_verilog -sv 
+read_xdc ..\\SRC\\Basys3_Lab1_Constraints.xdc
 
-# Read in any additional settings if needed
-# ...
+set_property top top_level [current_fileset]
 
 # Launch synthesis
-launch_runs synth_1 -jobs 4
+synth_design
 
-# Wait for synthesis to complete
-wait_on_run synth_1
+#Link Design
+link_design -part xc7a35tcpg236-1
 
-# Launch implementation
-launch_runs impl_1 -jobs 4
 
-# Wait for implementation to complete
-wait_on_run impl_1
+write_checkpoint -force post_synth
 
-# Write the bitstream
-write_bitstream -force Lab1.bit
+opt_design
 
-# Optionally, close the project if you don't need it anymore
-close_project
+write_checkpoint -force post_opt
+
+place_design
+
+write_checkpoint -force post_place
+
+route_design
+
+write_checkpoint -force post_route
+
+report_utilization -hierarchical -file utilization_hierarchical.rpt
+
