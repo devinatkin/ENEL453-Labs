@@ -40,7 +40,7 @@ module top_level (
 
     // State Machine Logic
     always @(posedge CLK) begin
-        if (!RESET_N) begin
+        if (!RESET) begin
             state <= LOAD_DATA;
             next_state <= LOAD_DATA;
             data_buffer <= 16'h0000;
