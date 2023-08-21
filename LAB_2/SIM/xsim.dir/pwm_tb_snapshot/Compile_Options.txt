@@ -1,0 +1,1 @@
+-debug "typical" -top "tb_pwm_module" -snapshot "pwm_tb_snapshot" 
