@@ -12,7 +12,7 @@ set_property top top_level [current_fileset]
 synth_design
 
 #Link Design
-link_design -part xc7a35tcpg236-1
+# link_design -part xc7a35tcpg236-1
 
 
 write_checkpoint -force post_synth

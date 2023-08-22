@@ -8,12 +8,11 @@ read_verilog -sv ..\\SRC\\pwm_module.sv
 read_xdc ..\\SRC\\Basys3_Lab2Constraints.xdc
 
 set_property top top_level [current_fileset]
-
 # Launch synthesis
 synth_design
 
 #Link Design
-link_design -part xc7a35tcpg236-1
+#link_design -part xc7a35tcpg236-1
 
 
 write_checkpoint -force post_synth
@@ -35,7 +34,7 @@ report_utilization -hierarchical -file utilization_hierarchical.rpt
 write_bitstream bitstream.bit
 
 open_hw_manager
-connect_hw_server -url 10.13.113.125:3121
+connect_hw_server -url 10.13.81.70:3121
 refresh_hw_server
 open_hw_target
 

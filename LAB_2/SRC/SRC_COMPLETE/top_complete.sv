@@ -1,5 +1,5 @@
 
-module top (
+module top_level (
     input clk,
     input reset,
     input [15:0] switches,

@@ -37,7 +37,7 @@ module tb_top_level;
   integer file_descriptor;
 
   // Instantiate the top_level module
-  top dut (
+  top_level dut (
     .clk(clk),
     .reset(reset),
     .switches(switches),
