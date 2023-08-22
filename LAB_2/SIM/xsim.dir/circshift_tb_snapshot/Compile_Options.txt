@@ -1,0 +1,1 @@
+-debug "typical" -top "tb_circular_shift_register" -snapshot "circshift_tb_snapshot" 
