@@ -31,7 +31,7 @@ write_checkpoint -force post_route
 
 report_utilization -hierarchical -file utilization_hierarchical.rpt
 
-write_bitstream bitstream.bit
+write_bitstream bitstream.bit -force
 
 open_hw_manager
 connect_hw_server -url 10.13.113.125:3121
