@@ -2,9 +2,10 @@
 create_project temp_project ./temp_project -part xc7a35tcpg236-1 -in_memory -force
 
 # Add source files (adjust paths and types as needed)
-read_verilog -sv ..\\SRC\\top.sv
+read_verilog -sv ..\\SRC\\SRC_COMPLETE\\top_complete.sv
+read_verilog -sv ..\\SRC\\SRC_COMPLETE\\circular_shift_register.sv
 read_verilog -sv ..\\SRC\\pwm_module.sv
-read_xdc ..\\SRC\\Basys3_Lab2_Provided_Constraints.xdc
+read_xdc ..\\SRC\\SRC_COMPLETE\\Basys3_Lab2_Constraints.xdc
 
 set_property top top_level [current_fileset]
 # Launch synthesis
