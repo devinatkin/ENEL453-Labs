@@ -1,0 +1,1 @@
+-debug "typical" -top "tb_clock_divider" -snapshot "onesecond_tb_snapshot" 

@@ -1,1 +1,0 @@
--debug "typical" -top "tb_mux_2to1" -snapshot "mux_tb_snapshot" 
