@@ -1,37 +1,84 @@
-module stopwatch (
-  input wire clk,      // Clock input
-  input wire rst_n,    // Active low asynchronous reset
-  input wire start,    // Start the stopwatch
-  input wire stop,     // Stop the stopwatch
-  input wire reset,    // Reset the stopwatch
-  output reg [31:0] count // 32-bit stopwatch count
-);
+`timescale 1ns / 1ps
 
-  reg running; // Flag to indicate if the stopwatch is running
+module stop_watch_tb;
 
-  always @(posedge clk or negedge rst_n) begin
-    if (~rst_n) begin
-      // Asynchronous reset
-      running <= 1'b0;
-      count <= 32'b0;
-    end else if (reset) begin
-      // Reset the stopwatch
-      running <= 1'b0;
-      count <= 32'b0;
-    end else if (start) begin
-      // Start the stopwatch
-      running <= 1'b1;
-    end else if (stop) begin
-      // Stop the stopwatch
-      running <= 1'b0;
-    end
+  reg clk;
+  reg clk1k;
+  reg rst_n;
+  reg en;
+  reg start;
+  reg stop;
+  reg reset;
+  wire [5:0] minutes;
+  wire [5:0] seconds;
+
+  // Instantiate the DUT (Device Under Test)
+  stopwatch my_stopwatch (
+    .clk(clk),
+    .clk1k(clk1k),
+    .rst_n(rst_n),
+    .en(en),
+    .start(start),
+    .stop(stop),
+    .reset(reset),
+    .minutes(minutes),
+    .seconds(seconds)
+  );
+
+  // Clock generation for 100 MHz clock
+  always begin
+    #5 clk = ~clk;
   end
 
-  always @(posedge clk) begin
-    if (running) begin
-      // Increment count if running
-      count <= count + 1;
-    end
+  // Clock generation for 1 kHz clock
+  always begin
+    #500000 clk1k = ~clk1k;
   end
 
+  initial begin
+    // Initialize all inputs
+    $display("Starting simulation...");
+    clk = 0;
+    clk1k = 0;
+    rst_n = 0;
+    en = 0;
+    start = 0;
+    stop = 0;
+    reset = 0;
+
+    // Monitor statements for observing changes
+    $monitor("At time %t, Minutes: %d, Seconds: %d", $time, minutes, seconds);
+
+    // Apply synchronous reset
+    #10 rst_n = 1;
+    #10 rst_n = 0;
+    #500 rst_n = 1;
+
+    // Test case 1: Reset the stopwatch
+    reset = 1;
+    #20 reset = 0;
+    // Assertion to check if reset worked
+    if (minutes !== 6'b0 || seconds !== 6'b0) $error("Reset failed!");
+
+    // Test case 2: Start the stopwatch
+    en = 1;
+    start = 1;
+    #20 start = 0;
+
+    $display("Starting stopwatch...");
+    // Let it run for a minute of simulated time
+    do begin
+      #1000000;
+    end while (seconds !== 6'd2);
+
+    // Test case 3: Stop the stopwatch
+    stop = 1;
+    #20 stop = 0;
+
+    $display("Stopping stopwatch...");
+
+
+    // Finish the simulation
+    $finish;
+  end
 endmodule

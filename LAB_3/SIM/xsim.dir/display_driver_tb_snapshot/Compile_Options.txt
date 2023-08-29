@@ -1,0 +1,1 @@
+-debug "typical" -top "tb_display_driver" -snapshot "display_driver_tb_snapshot" 

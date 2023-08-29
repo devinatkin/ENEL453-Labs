@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module time_counter (
   input wire clk_1khz,       // 1 kHz Clock for millisecond counting
   input wire clk_high_speed, // High-speed clock for general operation
@@ -26,60 +28,83 @@ always @(posedge clk_high_speed) begin
       inc_min_prev <= 0;
     end else begin
 
-        // Sample the 1kHz clock at the rising edge of the high-speed clock
-        if (clk_1khz && ~clk_1khz_prev && en) begin
+        if (clk_1khz && ~clk_1khz_prev) begin // Sample the 1kHz clock at the rising edge of the high-speed clock
             // Count milliseconds on a positive edge of the 1kHz clock
-            if (up_down) begin
-                time_ms <= time_ms + 1;
-                if (time_ms >= 10'h3E8) begin
-                    time_ms <= 0;
-                    time_sec <= time_sec + 1;
-                end
-                            // Check for 1 minute boundary and act accordingly
-                if (time_sec >= 6'h3C) begin
-                    time_sec <= 0;
-                    time_min <= time_min + 1;
-                end
+            if (en) begin
+                if (up_down) begin
+                        if(time_ms < 10'h3E7) begin // Count milliseconds on a positive edge of the 1kHz clock if counting up and time_ms is not 999
+                            time_ms <= time_ms + 1;
+                        end else if (time_sec < 6'h3B) begin // If time_ms is 999, increment time_sec and set time_ms to 0, if time_sec is not 59
+                            time_ms <= 0;
+                            time_sec <= time_sec + 1;
+                        end else if (time_min < 6'h3B) begin // If time_sec is 59, increment time_min and set time_sec to 0, if time_min is not 59
+                            time_ms <= 0;
+                            time_sec <= 0;
+                            time_min <= time_min + 1;
+                        end
+                end else begin
 
-                // Increment or decrement by 1 second if inc_sec is toggled
-                if (inc_sec && ~inc_sec_prev) begin
-                    time_sec <= time_sec + 1;
-                end
 
-                // Increment or decrement by 1 minute if inc_min is toggled
-                if (inc_min && ~inc_min_prev) begin
-                    time_min <= time_min + 1;
-                end
-            end else begin
-                time_ms <= time_ms - 1;
-                if (time_ms <= 10'h0) begin
-                    time_ms <= 10'h3E8;
-                    time_sec <= time_sec - 1;
-                end
-                if (time_sec <= 6'h0) begin
-                    time_sec <= 6'h3C;
-                    time_min <= time_min - 1;
-                end
-
-                // Increment or decrement by 1 second if inc_sec is toggled
-                if (inc_sec && ~inc_sec_prev) begin
-                    time_sec <= time_sec - 1;
-                end
-
-                // Increment or decrement by 1 minute if inc_min is toggled
-                if (inc_min && ~inc_min_prev) begin
-                    time_min <= time_min - 1;
+                    // Decrement, but prevent rollover
+                        if(time_ms > 0) begin // Count milliseconds on a positive edge of the 1kHz clock if counting down and time_ms is not 0
+                            time_ms <= time_ms - 1;
+                        end else if (time_sec > 0) begin // If time_ms is 0, decrement time_sec and set time_ms to 999, if time_sec is not 0
+                            time_ms <= 10'h3E7;
+                            time_sec <= time_sec - 1;
+                        end else if (time_min > 0) begin // If time_sec is 0, decrement time_min and set time_sec to 59, if time_min is not 0
+                            time_ms <= 10'h3E7;
+                            time_sec <= 6'h3B;
+                            time_min <= time_min - 1;
+                        end  
                 end
             end
+        end else begin
+            if(up_down) begin 
+                if (inc_sec && ~inc_sec_prev) begin // Increment or decrement by 1 second if inc_sec is toggled
+                    if(time_sec < 6'h3C) begin
+                        time_sec <= time_sec + 1;
+                    end else begin
+                        time_sec <= 0;
+                        time_min <= time_min + 1;
+                    end
+
+                end else if (inc_min && ~inc_min_prev) begin // Increment or decrement by 1 minute if inc_min is toggled
+                    if (time_min < 6'h3C) begin
+                        time_min <= time_min + 1;
+                    end
+                end 
+
+
+            end else begin
+                // Decrement Second or Minute if inc_sec or inc_min is toggled, but prevent rollover
+                if (inc_sec && ~inc_sec_prev) begin // Increment or decrement by 1 second if inc_sec is toggled
+                    if(time_sec > 0) begin
+                        time_sec <= time_sec - 1;
+                    end else if (time_min > 0) begin
+                        time_sec <= 6'h3B;
+                        time_min <= time_min - 1;
+                    end
+
+                end else if (inc_min && ~inc_min_prev) begin // Increment or decrement by 1 minute if inc_min is toggled
+                    if(time_min > 0) begin
+                        time_min <= time_min - 1;
+                    end else begin
+                        time_min <= 6'h3B;
+                    end
+                    
+
+                end
+            end
+
+            // Update previous value for edge detection
+            inc_sec_prev <= inc_sec;
+            // Update previous value for edge detection
+            inc_min_prev <= inc_min;
+
         end
         // Update previous value for edge detection
         clk_1khz_prev <= clk_1khz;
 
-        // Update previous value for edge detection
-        inc_sec_prev <= inc_sec;
-
-        // Update previous value for edge detection
-        inc_min_prev <= inc_min;
     end
 end
 endmodule

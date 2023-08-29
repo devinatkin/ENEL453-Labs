@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module tb_time_counter;
 
   reg clk_1khz;
@@ -49,35 +51,77 @@ module tb_time_counter;
     #10 rst_n = 1;  // De-assert reset
     #10 en = 1;    // Enable counting
 
-    // Test: Increment milliseconds
-    #2000;
+    // DUT is counting (Run for 5 minutes printing the time every second)
+    do begin
+      #1000000 
+      $display("Time: %d:%d:%d", time_min, time_sec, time_ms);
+    end while (time_min < 5);
+    if (time_min != 5) $error("Time counter did not count for 5 minutes");
+    if (time_sec != 0) $error("Time counter did not count for 5 minutes");
+    if (time_ms != 0) $error("Time counter did not count for 5 minutes");
+
+    up_down = 0;  // Count down
+    // DUT is counting down (Run for 3 minutes printing the time every second)
+    do begin
+      #1000000 
+      $display("Time: %d:%d:%d", time_min, time_sec, time_ms);
+    end while (time_min > 1);
+    if (time_min != 1) $error("Time counter did not count for 3 minutes and 1 second");
+    if (time_sec != 59) $error("Time counter did not count for 3 minutes and 1 second");
+    if (time_ms != 0) $error("Time counter did not count for 3 minutes and 1 second");
     
-    // Test: Decrement milliseconds
-    up_down = 0;
-    #2000;
+    // Stop counting
+    en = 0;
+    #1000000 $display("Time: %d:%d:%d", time_min, time_sec, time_ms);
+    if (time_min != 1) $error("Time counter did not stop counting");
+    if (time_sec != 59) $error("Time counter did not stop counting");
+    if (time_ms != 0) $error("Time counter did not stop counting");
+
+    // Decrement seconds
+    inc_sec = 1;
+    #1000000 $display("Time: %d:%d:%d", time_min, time_sec, time_ms);
+    if (time_min != 1) $error("Time counter did not decrement seconds");
+    if (time_sec != 58) $error("Time counter did not decrement seconds");
+    if (time_ms != 0) $error("Time counter did not decrement seconds");
+
+    inc_sec = 0;
     
-    // Test: Increment seconds
+    // Decrement minutes
+    inc_min = 1;
+    #1000000 $display("Time: %d:%d:%d", time_min, time_sec, time_ms);
+    if (time_min != 0) $error("Time counter did not decrement minutes");
+    if (time_sec != 58) $error("Time counter did not decrement minutes");
+    if (time_ms != 0) $error("Time counter did not decrement minutes");
+
+    inc_min = 0;
+
+    // Increment seconds
     up_down = 1;
     inc_sec = 1;
-    #10 inc_sec = 0;
-    #10 inc_sec = 1;
-    
-    // Test: Decrement seconds
-    up_down = 0;
-    #10 inc_sec = 0;
-    #10 inc_sec = 1;
+    #1000000 $display("Time: %d:%d:%d", time_min, time_sec, time_ms);
+    if (time_min != 0) $error("Time counter did not increment seconds");
+    if (time_sec != 59) $error("Time counter did not increment seconds");
+    if (time_ms != 0) $error("Time counter did not increment seconds");
 
-    // Test: Increment minutes
-    up_down = 1;
+    inc_sec = 0;
+
+    // Increment minutes
     inc_min = 1;
-    #10 inc_min = 0;
-    #10 inc_min = 1;
+    #1000000 $display("Time: %d:%d:%d", time_min, time_sec, time_ms);
+    if (time_min != 1) $error("Time counter did not increment minutes");
+    if (time_sec != 59) $error("Time counter did not increment minutes");
+    if (time_ms != 0) $error("Time counter did not increment minutes");
 
-    // Test: Decrement minutes
-    up_down = 0;
-    #10 inc_min = 0;
-    #10 inc_min = 1;
-    
+    inc_min = 0;
+
+    // Reset
+    rst_n = 0;
+    #10 rst_n = 1;  // De-assert reset
+    #1000000 $display("Time: %d:%d:%d", time_min, time_sec, time_ms);
+    if (time_min != 0) $error("Time counter did not reset");
+    if (time_sec != 0) $error("Time counter did not reset");
+    if (time_ms != 0) $error("Time counter did not reset");
+
     // Finish the simulation
     $finish;
   end
