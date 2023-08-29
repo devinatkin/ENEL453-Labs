@@ -21,8 +21,8 @@ module display_driver(
 
     wire [3:0] assigned_value;
     
-    reg clk12k;
-    reg [2:0] clk12k_counter;
+    reg clk1k;
+    reg [15:0] clk1k_counter;
     assign assigned_value = !out_sel;
     assign an = (blink) ? (clk1s ? 6'h3F : assigned_value) : assigned_value;
 
@@ -93,14 +93,11 @@ module display_driver(
 
     always@(posedge clk100k) begin
         if(!rst_n) begin
-            clk12k_counter <= 3'd0;
-            clk12k <= 1'b0;
+            clk1k <= 1'b0;
+            clk1k_counter <= 16'd0;
         end else begin
-            clk12k_counter <= clk12k_counter + 1;
-            if(clk12k_counter == 3'd5) begin
-                clk12k_counter <= 3'd0;
-                clk12k <= ~clk12k;
-            end
+            clk1k <= (clk1k_counter == 16'd49999) ? !clk1k : clk1k;
+            clk1k_counter <= (clk1k_counter == 16'd49999) ? 16'd0 : clk1k_counter + 16'd1;
         end
     end
 
