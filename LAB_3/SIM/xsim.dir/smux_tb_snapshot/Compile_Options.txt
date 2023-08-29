@@ -1,1 +1,0 @@
--debug "typical" -top "tb_segment_mux" -snapshot "smux_tb_snapshot" 

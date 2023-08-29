@@ -46,7 +46,7 @@ module tb_top();
 
         // Reset pulse
         rst = 1;
-        #10 rst = 0;
+        #10000 rst = 0;
 
         // Start stopwatch
         start_btn = 1;

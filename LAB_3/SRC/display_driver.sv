@@ -19,8 +19,13 @@ module display_driver(
     wire minutes_ready;
     wire [3:0] out_sel;
 
-    assign an = clk1s ? 8'hFF : ~out_sel; //Turn off all anodes when blink is enabled and the 1Hz clock is high, otherwise turn on the selected anode
+    wire [3:0] assigned_value;
     
+    reg clk12k;
+    reg [2:0] clk12k_counter;
+    assign assigned_value = !out_sel;
+    assign an = (blink) ? (clk1s ? 6'h3F : assigned_value) : assigned_value;
+
     bcd_to_binary digit0_bcd_to_binary (
         .bcd(bcd0),
         .bin(digit0)
@@ -58,7 +63,7 @@ module display_driver(
     );
 
     segment_mux persistence_mux (
-        .clk(clk100k),
+        .clk(clk25k),
         .rst_n(rst_n),
         .in0(digit0),
         .in1(digit1),
@@ -82,6 +87,19 @@ module display_driver(
             if(minutes_ready) begin
                 bcd2 <= minutes_bcd[11:8];
                 bcd3 <= minutes_bcd[15:12];
+            end
+        end
+    end
+
+    always@(posedge clk100k) begin
+        if(!rst_n) begin
+            clk12k_counter <= 3'd0;
+            clk12k <= 1'b0;
+        end else begin
+            clk12k_counter <= clk12k_counter + 1;
+            if(clk12k_counter == 3'd5) begin
+                clk12k_counter <= 3'd0;
+                clk12k <= ~clk12k;
             end
         end
     end

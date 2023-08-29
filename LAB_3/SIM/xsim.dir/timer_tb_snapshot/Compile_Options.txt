@@ -1,1 +1,0 @@
--debug "typical" -top "tb_timer" -snapshot "timer_tb_snapshot" 

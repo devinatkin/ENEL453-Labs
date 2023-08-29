@@ -1,1 +1,0 @@
--debug "typical" -top "tb_bcd_to_binary" -snapshot "bcd_tb_snapshot" 
