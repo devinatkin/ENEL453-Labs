@@ -1,0 +1,38 @@
+=== Standard Output ===
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/devin/Desktop/ENEL453_Labs/LAB_1/SRC/crc_calc.sv" into library work
+INFO: [VRFC 10-311] analyzing module CRC_CALC
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/devin/Desktop/ENEL453_Labs/LAB_1/SRC/tb_crc_calc.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_CRC_CALC
+Vivado Simulator v2023.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: E:/Xilinx/Vivado/2023.1/bin/unwrapped/win64.o/xelab.exe -debug typical -top tb_CRC_CALC -snapshot crc_tb_snapshot 
+Multi-threading is on. Using 10 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.CRC_CALC
+Compiling module work.tb_CRC_CALC
+Built simulation snapshot crc_tb_snapshot
+
+****** xsim v2023.1 (64-bit)
+  **** SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
+  **** IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+  **** SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/crc_tb_snapshot/xsim_script.tcl
+# xsim {crc_tb_snapshot} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+Original Message: Hello, CRC!
+Calculated CRC (Hex): 1898
+$finish called at time : 1210 ns : File "C:/Users/devin/Desktop/ENEL453_Labs/LAB_1/SRC/tb_crc_calc.sv" Line 70
+exit
+INFO: [Common 17-206] Exiting xsim at Tue Aug 29 21:14:19 2023...
+
+=== Standard Error ===

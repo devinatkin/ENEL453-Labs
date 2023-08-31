@@ -1,0 +1,1 @@
+-debug "typical" -top "tb_top_level" -snapshot "crc_sm_tb_snapshot" 

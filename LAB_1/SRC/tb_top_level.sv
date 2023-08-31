@@ -9,7 +9,7 @@ module tb_top_level;
   end
 
   // Define the reset signal
-  reg RESET_N = 0;
+  reg RESET = 0;
 
   // Define the switches signal
   reg [15:0] SWITCHES;
@@ -18,9 +18,9 @@ module tb_top_level;
   wire [15:0] LEDS;
 
   // Instantiate the top_level module
-  top_level uut (
+  top_level top_level (
     .CLK(CLK),
-    .RESET(RESET_N),
+    .RESET(RESET),
     .SWITCHES(SWITCHES),
     .LEDS(LEDS)
   );
@@ -30,11 +30,11 @@ module tb_top_level;
     static reg [15:0] test_number = 16'h1234;
 
     // Initialize the signals
-    RESET_N = 0;
+    RESET = 1;
     SWITCHES = 0;
 
     // Release the reset and load the test number into the switches
-    #20 RESET_N = 1;
+    #20 RESET = 0;
     SWITCHES = test_number;
 
     // Wait for enough cycles to allow the top-level module to process the input and update the LEDs
