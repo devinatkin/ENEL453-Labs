@@ -5,28 +5,33 @@ module segment_mux (
     input logic [6:0] in1,       // Second 7-bit input
     input logic [6:0] in2,       // Third 7-bit input
     input logic [6:0] in3,       // Fourth 7-bit input
-    output logic [6:0] out_val   // 7-bit output
+    output logic [6:0] out_val,   // 7-bit output
+    output logic [3:0] out_sel    // 4-bit output
 );
 
-    // Internal 2-bit counter for selecting the input values
-    logic [1:0] counter;
-
     // Behavior under active low reset or positive clock edge
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n)
-            counter <= 2'b00;   // Reset counter
-        else
-            counter <= counter + 1; // Increment counter on clock edge
+    always_ff @(posedge clk) begin
+        if (!rst_n) begin
+            out_sel <= 4'b0000;   // Reset counter
+        end else begin
+            case(out_sel)
+                4'b0001: out_sel <= 4'b0010; // Increment counter
+                4'b0010: out_sel <= 4'b0100; // Increment counter
+                4'b0100: out_sel <= 4'b1000; // Increment counter
+                4'b1000: out_sel <= 4'b0001; // Increment counter
+                default: out_sel <= 4'b0001; // Leaving Reset
+            endcase
+        end 
     end
 
     // Multiplexing the input values based on the counter
     always_comb begin
-        case (counter)
-            2'b00: out_val = in0; // First input
-            2'b01: out_val = in1; // Second input
-            2'b10: out_val = in2; // Third input
-            2'b11: out_val = in3; // Fourth input
-            default: out_val = 7'b0000000; // Shouldn't get here, but it's good to have a default case
+        case (out_sel)
+            4'b0001: out_val = in0; // First input
+            4'b0010: out_val = in1; // Second input
+            4'b0100: out_val = in2; // Third input
+            4'b1000: out_val = in3; // Fourth input
+            default: out_val = 7'b0000000; // Reset
         endcase
     end
 

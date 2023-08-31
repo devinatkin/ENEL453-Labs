@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module mux_2to1 #(
     parameter int DATA_WIDTH = 8  // Parameterized data width with a default value of 8 bits
 ) (

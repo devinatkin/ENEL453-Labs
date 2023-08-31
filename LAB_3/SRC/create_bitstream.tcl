@@ -1,3 +1,4 @@
+
 # Create a new temporary project
 create_project temp_project ./temp_project -part xc7a35tcpg236-1 -in_memory -force
 
@@ -11,6 +12,8 @@ read_verilog -sv ..\\SRC\\one_second.sv
 read_verilog -sv ..\\SRC\\mode_mux.sv
 read_verilog -sv ..\\SRC\\display_driver.sv
 read_verilog -sv ..\\SRC\\bcd_binary.sv
+read_verilog -sv ..\\SRC\\debounce_wrapper.sv
+read_verilog -sv ..\\SRC\\stopwatch_timer_wrapper.sv
 read_verilog -sv ..\\SRC\\for_students\\debounce.sv
 read_verilog -sv ..\\SRC\\for_students\\double_dabble.sv
 
