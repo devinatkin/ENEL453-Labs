@@ -1,6 +1,6 @@
 module CRC_Statemachine (
     input CLK,
-    input RESET,
+    input RESET_N,
     input [15:0] INPUT_CRC,
     output reg [15:0] OUTPUT_CRC,
     output reg DATA_IN,
@@ -25,7 +25,7 @@ module CRC_Statemachine (
 
     // State Machine Logic
     always @(posedge CLK) begin
-        if (RESET) begin
+        if (RESET_N) begin
             state <= LOAD_DATA;
             next_state <= LOAD_DATA;
             data_buffer <= 16'h0000;

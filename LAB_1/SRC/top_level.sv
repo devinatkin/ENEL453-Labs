@@ -17,7 +17,7 @@ module top_level (
     // CRC Module Instance
     CRC_CALC crc_calc (
         .CLK(CLK),
-        .RESET_N(!RESET),
+        .RESET_N(RESET),
         .DATA_IN(DATA_IN),
         .READ_MODE(READ_MODE),
         .CRC_OUT(CRC_OUT)
@@ -26,7 +26,7 @@ module top_level (
     // State Machine Instance
     CRC_Statemachine state_machine (
         .CLK(CLK),
-        .RESET(RESET),
+        .RESET_N(RESET),
         .INPUT_CRC(SWITCHES),
         .OUTPUT_CRC(LEDS),
         .DATA_IN(DATA_IN),
