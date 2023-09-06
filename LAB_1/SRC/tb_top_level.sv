@@ -1,7 +1,7 @@
 module tb_top_level;
 
   // Define the clock signal
-  reg CLK = 0;
+  logic CLK = 0;
 
   // Clock Generation
   always begin
@@ -9,13 +9,13 @@ module tb_top_level;
   end
 
   // Define the reset signal
-  reg RESET = 0;
+  logic RESET = 0;
 
   // Define the switches signal
-  reg [15:0] SWITCHES;
+  logic [15:0] SWITCHES;
 
   // Define the LEDs wire
-  wire [15:0] LEDS;
+  logic [15:0] LEDS;
 
   // Instantiate the top_level module
   top_level top_level (
@@ -27,14 +27,14 @@ module tb_top_level;
 
   initial begin
     // Declare a 16-bit number to be used for testing
-    static reg [15:0] test_number = 16'h1234;
+    static logic [15:0] test_number = 16'h1234;
 
     // Initialize the signals
-    RESET = 1;
+    RESET = 0;
     SWITCHES = 0;
 
     // Release the reset and load the test number into the switches
-    #20 RESET = 0;
+    #20 RESET = 1;
     SWITCHES = test_number;
 
     // Wait for enough cycles to allow the top-level module to process the input and update the LEDs

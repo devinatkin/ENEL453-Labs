@@ -1,7 +1,7 @@
 module tb_CRC_CALC;
 
   // Define the clock signal
-  reg CLK = 0;
+  logic CLK = 0;
 
   // Clock Generation
   always begin
@@ -9,16 +9,16 @@ module tb_CRC_CALC;
   end
 
   // Define the reset signal
-  reg RESET_N = 0;
+  logic RESET_N = 0;
 
   // Define the data input signal
-  reg DATA_IN = 0;
+  logic DATA_IN = 0;
 
   // Define the read mode signal
-  reg READ_MODE = 0;
+  logic READ_MODE = 0;
 
   // Define the CRC output wire
-  wire CRC_OUT;
+  logic CRC_OUT;
 
   // Instantiate the CRC_CALC module
   CRC_CALC uut (

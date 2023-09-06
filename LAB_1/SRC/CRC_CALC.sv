@@ -27,12 +27,12 @@ module CRC_CALC(
     );
     
     // CRC Register
-    reg [15:0] CRC_REG;
+    logic [15:0] CRC_REG;
     
     // CRC Polynomial (XMODEM) 16'h1021
     
     // CRC Calculation
-    always @(posedge CLK) begin
+    always_ff @(posedge CLK) begin
         if (!RESET_N) begin                                         // Active Low Synchronous Reset
             CRC_REG <= 16'h0000;                                    // Reset the CRC Register to 0
             CRC_OUT <= 1'b0;                                        // Reset the CRC Output to 0

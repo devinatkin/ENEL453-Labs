@@ -12,19 +12,19 @@ module CRC_Statemachine (
     typedef enum {LOAD_DATA, CALC_CRC, SHIFT_IN_ZEROS, SHIFT_OUT_CRC, UPDATE_OUTPUT_CRC} state_t;
 
     // State Machine State Register
-    reg [2:0] state, next_state;
+    logic [2:0] state, next_state;
 
     // Data Buffer
-    reg [15:0] data_buffer;
+    logic [15:0] data_buffer;
 
     // Counter for Bit Processing
-    reg [4:0] bit_counter;
+    logic [4:0] bit_counter;
 
     // Calculated CRC Register
-    reg [15:0] calculated_crc;
+    logic [15:0] calculated_crc;
 
     // State Machine Logic
-    always @(posedge CLK) begin
+    always_ff @(posedge CLK) begin
         if (RESET_N) begin
             state <= LOAD_DATA;
             next_state <= LOAD_DATA;

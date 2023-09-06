@@ -2,7 +2,7 @@ module tb_CRC_Statemachine;
 
 
   // Define the clock signal
-  reg CLK = 0;
+  logic CLK = 0;
 
   // Clock Generation
   always begin
@@ -10,23 +10,23 @@ module tb_CRC_Statemachine;
   end
 
   // Define the reset signal
-  reg RESET = 0;
+  logic RESET = 0;
 
   // Define the switches signal
-  reg [15:0] SWITCHES;
+  logic [15:0] SWITCHES;
 
   // Define the LEDs wire
-  wire [15:0] LEDS;
+  logic [15:0] LEDS;
 
   // Instantiate the top_level module
     // CRC Output Signal
-    wire CRC_OUT;
+    logic CRC_OUT;
 
     // Data Input Signal for CRC Calculation
-    reg DATA_IN;
+    logic DATA_IN;
     
     // Read Mode Signal
-    reg READ_MODE;
+    logic READ_MODE;
 
     // CRC Module Instance
     CRC_CALC crc_calc (
@@ -51,7 +51,7 @@ module tb_CRC_Statemachine;
 
   initial begin
     // Declare a 16-bit number to be used for testing
-    static reg [15:0] test_number = 16'h1234;
+    static logic [15:0] test_number = 16'h1234;
 
     // Initialize the signals
     RESET = 1;
