@@ -25,7 +25,7 @@ module CRC_Statemachine (
 
     // State Machine Logic
     always_ff @(posedge CLK) begin
-        if (RESET_N) begin
+        if (!RESET_N) begin
             state <= LOAD_DATA;
             next_state <= LOAD_DATA;
             data_buffer <= 16'h0000;

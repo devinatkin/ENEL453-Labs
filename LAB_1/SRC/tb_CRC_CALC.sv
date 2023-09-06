@@ -34,7 +34,7 @@ module tb_CRC_CALC;
     static string message = "Hello, CRC!";
 
     // Declare a variable to hold the calculated CRC
-    reg [15:0] calculated_crc;
+    logic [15:0] calculated_crc;
 
     // Initialize the signals
     

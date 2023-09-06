@@ -40,7 +40,7 @@ module tb_CRC_Statemachine;
     // State Machine Instance
     CRC_Statemachine dut (
         .CLK(CLK),
-        .RESET(RESET),
+        .RESET_N(!RESET),
         .INPUT_CRC(SWITCHES),
         .OUTPUT_CRC(LEDS),
         .DATA_IN(DATA_IN),
