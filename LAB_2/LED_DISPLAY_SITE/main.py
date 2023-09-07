@@ -21,7 +21,7 @@ def upload_file():
         # If user does not select file, browser also
         # submits an empty part without filename
         if file.filename == '':
-            return 'No selected file', 400
+            return 'No selected file', 400 # Bad request
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -32,7 +32,7 @@ def upload_file():
             video_path = os.path.join(app.config['UPLOAD_FOLDER'], video_filename)
             create_led_video(file_path, video_path)
 
-            return send_from_directory(app.config['UPLOAD_FOLDER'], video_filename, as_attachment=True)
+            return send_from_directory(app.config['UPLOAD_FOLDER'], video_filename, as_attachment=True) # Send the video file as an attachment
 
     return '''
     <!doctype html>
