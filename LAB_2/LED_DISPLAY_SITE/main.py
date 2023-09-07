@@ -2,6 +2,8 @@ from flask import Flask, request, send_from_directory, render_template
 import os
 from werkzeug.utils import secure_filename
 from create_led_video import create_led_video  # Importing the create_led_video function
+from asgiref.wsgi import WsgiToAsgi
+
 import tempfile
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = tempfile.gettempdir()
@@ -43,4 +45,6 @@ def serve_logo():
     return send_from_directory(os.path.join(app.root_path, 'static'),'logo.png')
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    asgi_app = WsgiToAsgi(app)
+    import uvicorn
+    uvicorn.run(asgi_app, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
