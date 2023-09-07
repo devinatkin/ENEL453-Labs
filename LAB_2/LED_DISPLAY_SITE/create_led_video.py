@@ -68,7 +68,7 @@ def create_led_video(file_path, video_path, height=32, width=512, frame_rate=30)
             start_x = i * 32
             end_x = start_x + 32
             frame[:, start_x:end_x] = color
-
+        print(f"Frame {frame_num + 1} / {num_frames}")
         out.write(frame)
 
     out.release()

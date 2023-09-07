@@ -31,6 +31,7 @@ def upload_file():
             # Generate video
             video_filename = filename.split('.')[0] + '.avi'
             video_path = os.path.join(app.config['UPLOAD_FOLDER'], video_filename)
+            print(f"Creating video: {video_path}")
             create_led_video(file_path, video_path)
 
             return send_from_directory(app.config['UPLOAD_FOLDER'], video_filename, as_attachment=True) # Send the video file as an attachment
