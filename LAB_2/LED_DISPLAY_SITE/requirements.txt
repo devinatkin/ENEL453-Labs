@@ -1,4 +1,4 @@
 Flask==2.1.0
 opencv-python-headless==4.7.0.72
 uvicorn==0.23.2
-asgiref==4.4.0
+asgiref==3.7.2
