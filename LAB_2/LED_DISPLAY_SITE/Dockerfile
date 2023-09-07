@@ -11,6 +11,10 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . ./
 
+# Install libGL for OpenCV
+RUN apt-get update && \
+    apt-get install -y libgl1-mesa-dev
+
 # Install production dependencies.
 RUN pip install --no-cache-dir -r requirements.txt
 
