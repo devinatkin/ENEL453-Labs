@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, render_template
 import os
 from werkzeug.utils import secure_filename
 from create_led_video import create_led_video  # Importing the create_led_video function
@@ -35,15 +35,11 @@ def upload_file():
 
             return send_from_directory(app.config['UPLOAD_FOLDER'], video_filename, as_attachment=True) # Send the video file as an attachment
 
-    return '''
-    <!doctype html>
-    <title>Upload LED Text File</title>
-    <h1>Upload LED Text File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
+    return render_template('upload_form.html')  # Render the upload form template
+
+@app.route('/logo.png')
+def serve_logo():
+    return send_from_directory(os.path.join(app.root_path, 'static'),'logo.png')
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

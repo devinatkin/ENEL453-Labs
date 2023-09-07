@@ -91,3 +91,6 @@
 !*.py
 !requirements.txt
 !Dockerfile
+!*.css
+!*.png
+!*.ico
