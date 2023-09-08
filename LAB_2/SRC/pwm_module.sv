@@ -8,10 +8,10 @@ input wire clk,                         // 1-bit input: clock
 input wire rst_n,                       // 1-bit input: reset
 input [bit_width-1:0] duty,              // bitwidth-bit input: duty cycle
 input [bit_width-1:0] max_value,         // bitwidth-bit input: maximum value
-output reg pwm_out                     // 1-bit output: pwm output
+output logic pwm_out                     // 1-bit output: pwm output
 );
 
-reg [bit_width-1:0] counter;
+logic [bit_width-1:0] counter;
 
 // pwm output is high when counter is less than duty
 // otherwise, pwm output is low

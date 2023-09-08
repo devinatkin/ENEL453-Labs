@@ -1,11 +1,19 @@
 `timescale 1ns/1ps
 
+// PWM module testbench
+// This testbench tests the PWM module by generating a PWM signal with a variable duty cycle
+// The testbench measures the period of the PWM signal and the time the signal is high and low
+// The testbench then calculates the duty cycle of the PWM signal and compares it to the intended duty cycle
+// The testbench also calculates the error between the intended duty cycle and the measured duty cycle
+// The testbench should work for all duty cycles except for 0% and 100% duty cycle (which won't measure the period correctly for this testbench)
+// This is good enough for our purposes, since we only need to test the PWM module for duty cycles between 0% and 100%
+
 module tb_pwm_module;
 
   // Parameters
   localparam bit_width = 10;                                // Instantiation parameter for the PWM module, sets the bit width of the PWM counter
   localparam CLK_PERIOD = 10;                               // Time period of the clock (in simulation time units) 10ns = 100MHz
-  localparam [bit_width-1:0] max_value = (1<<bit_width)-2;  // Maximum value of the PWM counter, this sets the period of the PWM signal
+  localparam [bit_width-1:0] max_value = (1<<bit_width)-1;  // Maximum value of the PWM counter, this sets the period of the PWM signal
   // Inputs
   logic clk;                                                // Clock input
   logic rst_n;                                              // Reset input (active-low)
@@ -49,8 +57,8 @@ real error = 1;
     rst_n = 1; // Release reset
     #20;       // Wait for a few cycles
 
-    // Test with different duty cycle values, should work for all duty cycles except for 0%
-    for (int i = 1; i < max_value; i++) begin
+    // Test with different duty cycle values, should work for all duty cycles except for 0% and 100%
+    for (int i = 1; i <= max_value; i++) begin
       #(max_value*CLK_PERIOD*2);
       duty = i;
     end
@@ -58,7 +66,7 @@ real error = 1;
   end
 
   // Test cases
-    // Test with different duty cycle values, should work for all duty cycles except for 0%
+    // Test with different duty cycle values, should work for all duty cycles except for 0% and 100%
     always @(posedge pwm_out) begin
         current_time = $time;
         if(previous_duty_out_rise != 0 && previous_duty_out_fall != 0) begin
