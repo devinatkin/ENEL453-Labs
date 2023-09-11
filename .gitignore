@@ -97,3 +97,9 @@
 !*.html
 top.tcl
 dupFiles.rpt
+post_opt.dcp
+post_place.dcp
+post_route.dcp
+post_synth.dcp
+utilization_hierarchical.rpt
+top_level_propImpl.xdc
