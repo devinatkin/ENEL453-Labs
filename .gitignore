@@ -95,3 +95,5 @@
 !*.png
 !*.ico
 !*.html
+top.tcl
+dupFiles.rpt
