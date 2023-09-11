@@ -24,4 +24,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # to be equal to the cores available.
 # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
 # Run the web service using Uvicorn
-CMD exec gunicorn main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+CMD exec gunicorn main:app --workers 4 --bind 0.0.0.0:$PORT

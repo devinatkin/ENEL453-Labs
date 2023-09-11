@@ -7,12 +7,11 @@ module top_level (
 );
 
     localparam bit_width = 8; // Set the bit width to 8 for PWM instances
-    reg rst_n;
-    reg [7:0] duty [15:0];
-    reg [15:0] pwm_out;
-    reg [7:0] reg_out [15:0]; // Output of the circular shift register
-    reg wide_pwm_out;
-    wire clk_reduced; // Reduced clock signal for the circular shift register
+    logic rst_n;
+    logic [7:0] duty [15:0];
+    logic [15:0] pwm_out;
+    logic [7:0] reg_out [15:0]; // Output of the circular shift register
+    logic clk_reduced; // Reduced clock signal for the circular shift register
 
     // Instantiate 16 PWM modules
     genvar i;
@@ -45,11 +44,8 @@ module top_level (
         .rst_n(rst_n),
         .duty(5000000), // 50% duty cycle to reduce 100MHz to 50Hz
         .max_value(10000000), // Set to 100MHz
-        .pwm_out(wide_pwm_out)
+        .pwm_out(clk_reduced)
     );
-
-    // Clock reduction using the 17th PWM module
-    assign clk_reduced = (wide_pwm_out == 1);
 
     // Control signals
     assign rst_n = ~reset;
