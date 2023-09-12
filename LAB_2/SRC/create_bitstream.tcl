@@ -7,7 +7,7 @@ read_verilog -sv ..\\SRC\\pwm_module.sv
 
 read_xdc ..\\SRC\\Basys3_Lab2_Provided_Constraints.xdc
 
-set_property top top [current_fileset]
+set_property top top_level [current_fileset]
 # Launch synthesis
 synth_design
 
