@@ -6,10 +6,10 @@ module top_level (
 );
 
 localparam bit_width = 16;   
-reg rst_n;
-reg [bit_width-1:0] duty;
-reg pwm_out;
-reg [bit_width-1:0] max_value;
+logic rst_n;
+logic [bit_width-1:0] duty;
+logic pwm_out;
+logic [bit_width-1:0] max_value;
 
   pwm_module #(
     .bit_width(bit_width)
