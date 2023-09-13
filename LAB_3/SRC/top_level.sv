@@ -29,40 +29,37 @@ module top(
 
     wire rst_n;
     assign rst_n = !rst;
-    // Instantiate the clock divider
-    clock_divider clock_divider_inst(
-        .clk_100MHz(clk),
-        .rst_n(!rst),
-        .clk_1Hz(clk_1Hz),
-        .clk_1kHz(clk_1kHz)
-    );
+    // // Instantiate the clock divider
+    // clock_divider clock_divider_inst(
+    //     .clk_100MHz(clk),
+    //     .rst_n(!rst),
+    //     .clk_1Hz(clk_1Hz),
+    //     .clk_1kHz(clk_1kHz)
+    // );
 
     display_driver display_driver_inst(
         .clk(clk),
-        .clk100k(clk_1kHz),
-        .clk1s(clk_1Hz),
         .rst_n(rst_n),
-        .minutes(minutes),
-        .seconds(seconds),
-        .blink(blink),
+        .minutes(6'd22),
+        .seconds(6'd30),
         .seg(seg),
         .an(an)
     );
 
-    stopwatch_timer_wrapper stopwatch_timer_wrapper_inst(
-        .clk(clk),
-        .clk_1kHz(clk_1kHz),
-        .rst_n(rst_n),
-        .mode_sw(mode_sw),
-        .start(start),
-        .stop(stop),
-        .reset(reset),
-        .inc_min(inc_min),
-        .inc_sec(inc_sec),
-        .minutes(minutes),
-        .seconds(seconds),
-        .blink(blink)
-    );
+    // stopwatch_timer_wrapper stopwatch_timer_wrapper_inst(
+    //     .clk(clk),
+    //     .clk_1kHz(clk_1kHz),
+    //     .rst_n(rst_n),
+    //     .mode_sw(mode_sw),
+    //     .start(start),
+    //     .stop(stop),
+    //     .reset(reset),
+    //     .inc_min(inc_min),
+    //     .inc_sec(inc_sec),
+    //     .minutes(minutes),
+    //     .seconds(seconds),
+    //     .blink(blink)
+    // );
 
     debounce_wrapper debounce_wrapper (
         .clk(clk), 

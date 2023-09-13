@@ -11,6 +11,8 @@ read_verilog -sv ..\\SRC\\segment_mux.sv
 read_verilog -sv ..\\SRC\\one_second.sv
 read_verilog -sv ..\\SRC\\mode_mux.sv
 read_verilog -sv ..\\SRC\\display_driver.sv
+read_verilog -sv ..\\SRC\\sevenseg4ddriver.sv
+read_verilog -sv ..\\SRC\\for_students\\pwm_module.sv
 read_verilog -sv ..\\SRC\\bcd_binary.sv
 read_verilog -sv ..\\SRC\\debounce_wrapper.sv
 read_verilog -sv ..\\SRC\\stopwatch_timer_wrapper.sv
@@ -46,7 +48,7 @@ report_utilization -hierarchical -file utilization_hierarchical.rpt
 write_bitstream bitstream.bit -force
 
 open_hw_manager
-connect_hw_server -url 10.13.141.4:3121
+connect_hw_server -url 10.13.89.50:3121
 refresh_hw_server
 open_hw_target
 
