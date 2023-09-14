@@ -11,7 +11,7 @@ read_verilog -sv ..\\SRC\\segment_mux.sv
 read_verilog -sv ..\\SRC\\one_second.sv
 read_verilog -sv ..\\SRC\\mode_mux.sv
 read_verilog -sv ..\\SRC\\display_driver.sv
-read_verilog -sv ..\\SRC\\sevenseg4ddriver.sv
+read_verilog -sv ..\\SRC\\for_students\\sevenseg4ddriver.sv
 read_verilog -sv ..\\SRC\\for_students\\pwm_module.sv
 read_verilog -sv ..\\SRC\\bcd_binary.sv
 read_verilog -sv ..\\SRC\\debounce_wrapper.sv
