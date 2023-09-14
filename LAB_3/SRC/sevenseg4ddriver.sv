@@ -12,7 +12,8 @@ module sevenseg4ddriver(
     );
 
     logic clk_reduced; // Reduced clock signal for the mux
-
+    logic [6:0] segments_mux; // Mux output for the segments
+    assign segments = ~segments_mux; // Invert the output for the segments
     segment_mux persistence_mux (
         .clk(clk_reduced),
         .rst_n(rst_n),
@@ -20,17 +21,17 @@ module sevenseg4ddriver(
         .in1(digit1_segments),
         .in2(digit2_segments),
         .in3(digit3_segments),
-        .out_val(segments),
+        .out_val(segments_mux),
         .out_sel(anodes)
     );
 
     pwm_module #(
-        .bit_width(32) // Wide bit width setup
+        .bit_width(20) // Wide bit width setup
     ) clk_reducer (
         .clk(clk),
         .rst_n(rst_n),
-        .duty(5000000), 
-        .max_value(10000000),
+        .duty(5000), 
+        .max_value(10000),
         .pwm_out(clk_reduced)
     );
 

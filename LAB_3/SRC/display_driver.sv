@@ -17,7 +17,7 @@ module display_driver(
 
     wire [3:0] assigned_value;
     
-    assign an = !out_sel;
+    assign an = ~out_sel;
 
     bcd_to_binary digit0_bcd_to_binary (
         .bcd(bcd0),

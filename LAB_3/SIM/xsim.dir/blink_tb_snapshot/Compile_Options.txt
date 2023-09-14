@@ -1,0 +1,1 @@
+-debug "typical" -top "tb_blinking_display" -snapshot "blink_tb_snapshot" 

@@ -18,6 +18,7 @@ read_verilog -sv ..\\SRC\\debounce_wrapper.sv
 read_verilog -sv ..\\SRC\\stopwatch_timer_wrapper.sv
 read_verilog -sv ..\\SRC\\for_students\\debounce.sv
 read_verilog -sv ..\\SRC\\for_students\\double_dabble.sv
+read_verilog -sv ..\\SRC\\blinking_display.sv
 
 read_xdc ..\\SRC\\Basys3_Lab3_Provided_Constraints.xdc
 
@@ -48,7 +49,7 @@ report_utilization -hierarchical -file utilization_hierarchical.rpt
 write_bitstream bitstream.bit -force
 
 open_hw_manager
-connect_hw_server -url 10.13.89.50:3121
+connect_hw_server -url 10.13.64.168:3121
 refresh_hw_server
 open_hw_target
 
