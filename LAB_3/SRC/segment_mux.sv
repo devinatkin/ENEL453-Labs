@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module segment_mux (
     input logic clk,            // Clock signal
     input logic rst_n,           // Active low reset signal
@@ -12,7 +14,7 @@ module segment_mux (
     // Behavior under active low reset or positive clock edge
     always_ff @(posedge clk) begin
         if (!rst_n) begin
-            out_sel <= 4'b0000;   // Reset counter
+            out_sel <= 4'b0001;   // Reset counter
         end else begin
             case(out_sel)
                 4'b0001: out_sel <= 4'b0010; // Increment counter

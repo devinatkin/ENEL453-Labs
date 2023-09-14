@@ -1,0 +1,1 @@
+-debug "typical" -top "sevenseg4ddrive_tb" -snapshot "ssdddd_tb_snapshot" 

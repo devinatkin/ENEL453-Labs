@@ -30,9 +30,9 @@ module tb_top_level;
   localparam NUM_RANDOM_SWITCHES = 1000; // Number of random switch values
 
   // Signals
-  reg clk;
-  reg rst;
-  reg [15:0] switches;
+  logic clk;
+  logic rst;
+  logic [15:0] switches;
   wire led;
   integer i;
   integer file_descriptor;

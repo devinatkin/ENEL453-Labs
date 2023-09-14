@@ -1,14 +1,10 @@
 module display_driver(
     input wire clk, //100Mhz System Clock
-    input wire clk100k, //100Khz Clock
-    input wire clk1s, //1Hz Clock
     input wire rst_n,
     input wire [5:0] minutes,
     input wire [5:0] seconds,
-    input wire blink,
     output reg [6:0] seg,   //Segment Outputs
     output reg [3:0] an     //Common Anode Outputs (0 = on, 1 = off)
-
     );
 
     wire [6:0] digit0, digit1, digit2, digit3;
@@ -21,10 +17,7 @@ module display_driver(
 
     wire [3:0] assigned_value;
     
-    reg clk1k;
-    reg [15:0] clk1k_counter;
-    assign assigned_value = !out_sel;
-    assign an = (blink) ? (clk1s ? 6'h3F : assigned_value) : assigned_value;
+    assign an = !out_sel;
 
     bcd_to_binary digit0_bcd_to_binary (
         .bcd(bcd0),
@@ -62,15 +55,15 @@ module display_driver(
         .ready(minutes_ready)
     );
 
-    segment_mux persistence_mux (
-        .clk(clk25k),
-        .rst_n(rst_n),
-        .in0(digit0),
-        .in1(digit1),
-        .in2(digit2),
-        .in3(digit3),
-        .out_val(seg),
-        .out_sel(out_sel)
+    sevenseg4ddriver seg_driver(
+    .clk(clk),
+    .rst_n(rst_n),
+    .digit0_segments(digit0),
+    .digit1_segments(digit1),
+    .digit2_segments(digit2),
+    .digit3_segments(digit3),
+    .segments(seg),
+    .anodes(out_sel)
     );
 
     always @(posedge clk) begin //Simple Logic to drive the BCD inputs to the 7-segment decoder
@@ -85,20 +78,11 @@ module display_driver(
                 bcd1 <= seconds_bcd[7:4];
             end
             if(minutes_ready) begin
-                bcd2 <= minutes_bcd[11:8];
-                bcd3 <= minutes_bcd[15:12];
+                bcd2 <= minutes_bcd[3:0];
+                bcd3 <= minutes_bcd[7:4];
             end
         end
     end
 
-    always@(posedge clk100k) begin
-        if(!rst_n) begin
-            clk1k <= 1'b0;
-            clk1k_counter <= 16'd0;
-        end else begin
-            clk1k <= (clk1k_counter == 16'd49999) ? !clk1k : clk1k;
-            clk1k_counter <= (clk1k_counter == 16'd49999) ? 16'd0 : clk1k_counter + 16'd1;
-        end
-    end
 
 endmodule
