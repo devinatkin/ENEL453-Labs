@@ -8,14 +8,14 @@ module time_counter (
   input wire en,             // Enable signal
   input wire inc_sec,        // Increment/Decrement 1 second
   input wire inc_min,        // Increment/Decrement 1 minute
-  output reg [9:0] time_ms, // Time in milliseconds (Max 1 second, will rollover to 0 after 1 second)
-  output reg [5:0] time_sec, // Time in seconds (Max 63 seconds, will rollover to 0 after 60 seconds)
-  output reg [5:0] time_min  // Time in minutes (Max 63 minutes, will rollover to 0 after 60 minutes)
+  output logic [9:0] time_ms, // Time in milliseconds (Max 1 second, will rollover to 0 after 1 second)
+  output logic [5:0] time_sec, // Time in seconds (Max 63 seconds, will rollover to 0 after 60 seconds)
+  output logic [5:0] time_min  // Time in minutes (Max 63 minutes, will rollover to 0 after 60 minutes)
 );
 
-reg clk_1khz_prev = 0;   // Store previous value of clk_1khz for edge detection
-reg inc_sec_prev = 0;    // Store previous value of inc_sec for edge detection
-reg inc_min_prev = 0;    // Store previous value of inc_min for edge detection
+logic clk_1khz_prev = 0;   // Store previous value of clk_1khz for edge detection
+logic inc_sec_prev = 0;    // Store previous value of inc_sec for edge detection
+logic inc_min_prev = 0;    // Store previous value of inc_min for edge detection
 
 always @(posedge clk_high_speed) begin
     if (~rst_n) begin

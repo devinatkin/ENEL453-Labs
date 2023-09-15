@@ -3,12 +3,12 @@ module display_driver(
     input wire rst_n,
     input wire [5:0] minutes,
     input wire [5:0] seconds,
-    output reg [6:0] seg,   //Segment Outputs
-    output reg [3:0] an     //Common Anode Outputs (0 = on, 1 = off)
+    output logic [6:0] seg,   //Segment Outputs
+    output logic [3:0] an     //Common Anode Outputs (0 = on, 1 = off)
     );
 
     wire [6:0] digit0, digit1, digit2, digit3;
-    reg [3:0] bcd0, bcd1, bcd2, bcd3;
+    logic [3:0] bcd0, bcd1, bcd2, bcd3;
     wire [15:0] seconds_bcd;
     wire [15:0] minutes_bcd;
     wire seconds_ready;

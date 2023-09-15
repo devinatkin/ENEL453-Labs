@@ -3,14 +3,14 @@
 module tb_display_driver();
 
     // Declare signals to connect to the display_driver module
-    reg clk;
-    reg rst_n;
-    reg [5:0] minutes;
-    reg [5:0] seconds;
+    logic clk;
+    logic rst_n;
+    logic [5:0] minutes;
+    logic [5:0] seconds;
     wire [6:0] seg;
     wire [3:0] an;
 
-    reg [31:0] displayHold;
+    logic [31:0] displayHold;
     // Instantiate the display_driver module
     display_driver uut (
         .clk(clk),

@@ -1,10 +1,10 @@
 module tb_blinking_display;
 
-  reg [3:0] anode_in; // 4-bit anode input
-  reg clk;            // System clock
-  reg rst_n;          // Active-low reset
-  reg blink;          // Blink control bit
-  reg clk_1hz;        // 1Hz clock
+  logic [3:0] anode_in; // 4-bit anode input
+  logic clk;            // System clock
+  logic rst_n;          // Active-low reset
+  logic blink;          // Blink control bit
+  logic clk_1hz;        // 1Hz clock
   wire [3:0] anode_out; // 4-bit anode output
 
   // Instantiate the DUT (Device Under Test)

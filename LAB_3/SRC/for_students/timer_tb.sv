@@ -2,15 +2,15 @@
 
 module tb_timer;
 
-  reg clk;
-  reg clk1k;
-  reg rst_n;
-  reg en;
-  reg start;
-  reg stop;
-  reg reset;
-  reg inc_min;
-  reg inc_sec;
+  logic clk;
+  logic clk1k;
+  logic rst_n;
+  logic en;
+  logic start;
+  logic stop;
+  logic reset;
+  logic inc_min;
+  logic inc_sec;
   wire [5:0] minutes;
   wire [5:0] seconds;
   wire blink;

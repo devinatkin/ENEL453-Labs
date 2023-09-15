@@ -2,13 +2,13 @@
 
 module tb_time_counter;
 
-  reg clk_1khz;
-  reg clk_high_speed;
-  reg rst_n;
-  reg up_down;
-  reg en;
-  reg inc_sec;
-  reg inc_min;
+  logic clk_1khz;
+  logic clk_high_speed;
+  logic rst_n;
+  logic up_down;
+  logic en;
+  logic inc_sec;
+  logic inc_min;
   wire [9:0] time_ms;
   wire [5:0] time_sec;
   wire [5:0] time_min;

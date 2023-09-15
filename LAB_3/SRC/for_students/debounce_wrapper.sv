@@ -2,7 +2,7 @@ module debounce_wrapper(
     input wire clk,
     input wire rst_n,
     input wire [4:0] buttons, // A 5-bit wide wire to hold the states of 5 buttons
-    output wire [4:0] results // A 5-bit wide wire to hold the debounced results
+    output logic [4:0] results // A 5-bit wide wire to hold the debounced results
 );
 
 

@@ -10,13 +10,13 @@ module timer (
   input wire reset,    // Reset the timer
   input wire inc_min,  // Set minutes
   input wire inc_sec,  // Set seconds
-  output reg [5:0] minutes,  // Minutes
-  output reg [5:0] seconds,  // Seconds
-  output reg blink          // Blink output
+  output logic [5:0] minutes,  // Minutes
+  output logic [5:0] seconds,  // Seconds
+  output logic blink          // Blink output
 );
 
-  reg running;  // Flag to indicate if the timer is running
-  reg set_time; // Flag to indicate if the time is set
+  logic running;  // Flag to indicate if the timer is running
+  logic set_time; // Flag to indicate if the time is set
   wire [9:0] time_ms;
   wire [5:0] time_sec;
   wire [5:0] time_min;
@@ -30,7 +30,7 @@ module timer (
     .clk_1khz(clk1k),
     .clk_high_speed(clk),
     .rst_n(rst_n && !reset),
-    .up_down(1'b0),  // Count down instead of up
+    .up_down(!running),  // Count down instead of up
     .en(en && running),
     .inc_sec(inc_sec),
     .inc_min(inc_min),

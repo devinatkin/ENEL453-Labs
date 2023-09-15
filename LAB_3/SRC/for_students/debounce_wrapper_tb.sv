@@ -8,14 +8,14 @@ module tb_debounce_wrapper;
     time clock_period = 10ns;
 
     // Inputs
-    reg clk;
-    reg [4:0] buttons; // For multiple buttons
-    reg reset_n;
+    logic clk;
+    logic [4:0] buttons; // For multiple buttons
+    logic reset_n;
 
     // Outputs
     wire [4:0] results; // For multiple debounced results
 
-    reg error = 0;
+    logic error = 0;
     StateType Test_State;
 
     // Instantiate the Unit Under Test (UUT)

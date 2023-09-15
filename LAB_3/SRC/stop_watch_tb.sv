@@ -2,13 +2,13 @@
 
 module stop_watch_tb;
 
-  reg clk;
-  reg clk1k;
-  reg rst_n;
-  reg en;
-  reg start;
-  reg stop;
-  reg reset;
+  logic clk;
+  logic clk1k;
+  logic rst_n;
+  logic en;
+  logic start;
+  logic stop;
+  logic reset;
   wire [5:0] minutes;
   wire [5:0] seconds;
 

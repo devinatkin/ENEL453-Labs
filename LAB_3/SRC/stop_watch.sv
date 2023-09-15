@@ -8,11 +8,11 @@ module stopwatch (
   input wire start,    // Start the stopwatch
   input wire stop,     // Stop the stopwatch
   input wire reset,    // Reset the stopwatch
-  output reg [5:0] minutes, // Minutes
-  output reg [5:0] seconds // Seconds
+  output logic [5:0] minutes, // Minutes
+  output logic [5:0] seconds // Seconds
 );
 
-  reg running; // Flag to indicate if the stopwatch is running
+  logic running; // Flag to indicate if the stopwatch is running
   wire [9:0] time_ms;
   wire [5:0] time_sec;
   wire [5:0] time_min;
