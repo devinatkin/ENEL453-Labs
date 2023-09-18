@@ -15,7 +15,7 @@ module blinking_display (
     if (!rst_n) begin
       blink_state <= 1'b0;
       anode_out <= 4'b1111; // Initialize to all digits off
-      clk_1hz_last <= 1'b0
+      clk_1hz_last <= 1'b0;
     end else begin
       // Detect rising edge of 1Hz clock to toggle blink_state
       if (clk_1hz && !clk_1hz_last) 

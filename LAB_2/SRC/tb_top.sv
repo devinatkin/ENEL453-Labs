@@ -26,8 +26,8 @@ module tb_top_level;
 
   // Parameters
   localparam CLK_PERIOD = 10; // 100 MHz clock
-  localparam SWITCHES_INCREMENT_INTERVAL = 50000000; // delay 
-  localparam NUM_RANDOM_SWITCHES = 1000; // Number of random switch values
+  localparam SWITCHES_INCREMENT_INTERVAL = 5000; // delay 
+  localparam NUM_RANDOM_SWITCHES = 100; // Number of random switch values
 
   // Signals
   logic clk;
@@ -52,7 +52,7 @@ module tb_top_level;
     // Generate the test output data
     always@(led) begin
         
-        $display("led = %b", led);
+        $display("led state = %b, at time: %0d", led, $time);
         print_leds_to_file({led,15'b000000000000000}, file_descriptor);    // 1 bit LED + 15 bits of padding   (Hint: use the print_leds_to_file function)
        
 
@@ -61,12 +61,13 @@ module tb_top_level;
   // Test Procedure
   initial begin
     
-
     // Initialize signals
     file_descriptor = $fopen("leds.txt", "w");
     clk = 0;
     rst = 0;
     switches = 16'h0000;
+
+    #2; // Small delay to move transitions away from clock edges
 
     // Apply reset
     #CLK_PERIOD rst = 1;

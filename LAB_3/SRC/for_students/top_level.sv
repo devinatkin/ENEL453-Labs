@@ -40,7 +40,7 @@ module top(
         .clk_1kHz(clk_1kHz)
     );
 
-    blinking_display uut (
+    blinking_display blink_disp (
         .anode_in(anode_raw),
         .clk(clk),
         .rst_n(rst_n),
@@ -58,11 +58,11 @@ module top(
         .an(anode_raw)
     );
 
-    stopwatch_timer_wrapper stopwatch_timer_wrapper_inst(
+    timer timer_module (
         .clk(clk),
-        .clk_1kHz(clk_1kHz),
+        .clk1k(clk1k),
         .rst_n(rst_n),
-        .mode_sw(mode_sw),
+        .en(1'b1),
         .start(start),
         .stop(stop),
         .reset(reset),

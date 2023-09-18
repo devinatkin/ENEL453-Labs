@@ -40,7 +40,7 @@ module tb_debounce_wrapper;
         reset_n = 0;
         Test_State = Resetting;
 
-        #100;
+        #102;   // wait a non-clock cycle length of time to move transitions off of clock edges
         reset_n = 1;
 
         // Example test for one button (say, START button at index 0)

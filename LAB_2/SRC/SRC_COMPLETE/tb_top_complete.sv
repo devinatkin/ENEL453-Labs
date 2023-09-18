@@ -61,6 +61,8 @@ module tb_top_level;
     reset = 0;
     switches = 16'h0000;
 
+    #2; // Small delay to move transitions away from clk edges
+
     // Apply reset
     #CLK_PERIOD reset = 1;
     #CLK_PERIOD;

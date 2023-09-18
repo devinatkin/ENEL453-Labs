@@ -5,11 +5,11 @@ module top_level (
     output reg led
 );
 
-localparam bit_width = 16;   
+localparam bit_width = 16;
+localparam max_value = 2**bit_width-1;   
 logic rst_n;
 logic [bit_width-1:0] duty;
 logic pwm_out;
-logic [bit_width-1:0] max_value;
 
   pwm_module #(
     .bit_width(bit_width)
@@ -23,6 +23,5 @@ logic [bit_width-1:0] max_value;
 
 assign rst_n = ~rst;
 assign duty = switches;
-assign max_value = 2**bit_width-1;
 assign led = pwm_out;
 endmodule

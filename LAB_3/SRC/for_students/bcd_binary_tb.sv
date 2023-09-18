@@ -1,5 +1,5 @@
 module tb_bcd_to_binary;
-
+    
     // Declaring signals to connect to the bcd_to_binary module
     logic [3:0] bcd;
     logic [6:0] bin;
@@ -13,11 +13,11 @@ module tb_bcd_to_binary;
     // Initial block to apply test vectors
     initial begin
         $display("Time\tBCD\tBinary");
-
+        #100;
         // Loop through all possible 4-bit BCD numbers
         for (bcd = 4'b0000; bcd <= 4'b1001; bcd = bcd + 1) begin
             #10; // Wait for 10 time units
-            $display("0%d\t%0b\t%0b", $time, bcd, bin);
+            $display("%0d\t%4b\t%0b", $time, bcd, bin);
         end
 
         // Test completed

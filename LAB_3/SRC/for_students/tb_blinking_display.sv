@@ -36,6 +36,8 @@ module tb_blinking_display;
     blink = 0;
     anode_in = 4'b0000;
     
+    #2; // Small delay to move transitions away from clock edges
+
     #10 rst_n = 1; // De-assert reset
 
     // Test case 1: Blink off, pass anode_in through
