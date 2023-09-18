@@ -26,7 +26,7 @@ begin
         end else begin
             counter <= counter + (bit_width)'('d1);
         end
-        pwm_out <= (counter <= duty);
+        pwm_out <= (counter < duty);
     end
 end
 endmodule
