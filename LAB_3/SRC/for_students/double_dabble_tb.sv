@@ -12,7 +12,7 @@ logic [13:0] bcd_to_bin = 14'b00_0000_0000_0000;
 initial begin
     clk = 0;
     rst = 1;
-    #5;
+    #6;
     clk = 1;
     #5;
     rst = 0;

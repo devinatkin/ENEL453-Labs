@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ns
 
 module tb_display_driver();
 
@@ -25,10 +25,11 @@ module tb_display_driver();
     always #5 clk = ~clk;
 
     always @(an) begin
-        $display("an = %b , seg = %b, time = %d:%d", an, seg, minutes, seconds);
+        $display("an = %b , seg = %b, time = %2d:%2d", an, seg, minutes, seconds);
+        #1; // Short Delay to move transitions away from clock edges
         if(an == 4'b0111) begin //Increment after the anodes have been cycled through
             displayHold = displayHold + 1;
-            if(displayHold == 32'd100) begin //Increment after 100 anode cycles
+            if(displayHold == 32'd3) begin //Increment after 100 anode cycles
                 displayHold = 32'd0;
                 seconds = seconds + 1;
                 if(seconds == 6'd60) begin
@@ -47,6 +48,9 @@ module tb_display_driver();
         minutes = 6'b0;
         seconds = 6'b0;
         displayHold = 32'd0;
+
+        #2; // Short Delay to move transitions away from clock edges
+
         // Apply reset
         rst_n = 0;
         #10;

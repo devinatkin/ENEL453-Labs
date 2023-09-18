@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 module clock_divider
 (
     input logic clk_100MHz,     // Input clock at 100MHz

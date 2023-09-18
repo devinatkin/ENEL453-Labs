@@ -8,6 +8,7 @@ module top(
         input wire softrst_btn,
         input wire inc_min_btn,
         input wire inc_sec_btn,
+        input wire inc_sw,
         input wire mode_sw,
         output wire [6:0] seg,
         output wire [3:0] an

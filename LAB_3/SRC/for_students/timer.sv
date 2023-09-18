@@ -10,6 +10,7 @@ module timer (
   input wire reset,    // Reset the timer
   input wire inc_min,  // Set minutes
   input wire inc_sec,  // Set seconds
+  input wire inc,
   output logic [5:0] minutes,  // Minutes
   output logic [5:0] seconds,  // Seconds
   output logic blink          // Blink output
@@ -30,7 +31,7 @@ module timer (
     .clk_1khz(clk1k),
     .clk_high_speed(clk),
     .rst_n(rst_n && !reset),
-    .up_down(!running),  // Count down instead of up
+    .up_down(inc),  // Count down instead of up
     .en(en && running),
     .inc_sec(inc_sec),
     .inc_min(inc_min),
