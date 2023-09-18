@@ -32,6 +32,8 @@ module tb_circular_shift_register;
         clk = 0;
         rst_n = 0;
         
+        #2; // Small delay so transitions don't occur in line with the clock. 
+
         // Apply reset
         #10 rst_n = 1;
         #10 rst_n = 0;
