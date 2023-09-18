@@ -1,0 +1,1 @@
+-debug "typical" -top "double_dabble_tb" -snapshot "doubledabble_tb_snapshot" 

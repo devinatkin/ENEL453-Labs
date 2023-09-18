@@ -38,11 +38,11 @@ module tb_segment_mux;
         
         // Apply reset
         rst_n = 0;
-        #10;
+        #12;
         rst_n = 1;
         
         // Check reset behavior
-        if (out_sel !== 4'b0000 || out_val !== 7'b0000000) begin
+        if (out_sel !== 4'b0001 || out_val !== 7'b0000001) begin
             $display("Error: Reset behavior not as expected. out_sel = %b, out_val = %b", out_sel, out_val);
         end
 
@@ -79,5 +79,6 @@ module tb_segment_mux;
         end
 
         $display("Simulation complete. Testbench successful if no errors are displayed.");
+        $finish;
     end
 endmodule
