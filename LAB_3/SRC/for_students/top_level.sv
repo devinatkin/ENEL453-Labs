@@ -9,7 +9,6 @@ module top(
         input wire inc_min_btn,
         input wire inc_sec_btn,
         input wire inc_sw,
-        input wire mode_sw,
         output wire [6:0] seg,
         output wire [3:0] an
     );
@@ -36,7 +35,7 @@ module top(
     // Instantiate the clock divider
     clock_divider clock_divider_inst(
         .clk_100MHz(clk),
-        .rst_n(!rst),
+        .rst_n(rst_n),
         .clk_1Hz(clk_1Hz),
         .clk_1kHz(clk_1kHz)
     );
@@ -61,9 +60,9 @@ module top(
 
     timer timer_module (
         .clk(clk),
-        .clk1k(clk1k),
+        .clk1k(clk_1kHz),
         .rst_n(rst_n),
-        .en(1'b0),
+        .en(1'b1),
         .start(start),
         .stop(stop),
         .reset(softrst),

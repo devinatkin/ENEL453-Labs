@@ -46,7 +46,7 @@ report_utilization -hierarchical -file utilization_hierarchical.rpt
 write_bitstream bitstream.bit -force
 
 open_hw_manager
-connect_hw_server -url 127.0.0.1:3121
+connect_hw_server -url 10.13.122.170:3121
 refresh_hw_server
 open_hw_target
 

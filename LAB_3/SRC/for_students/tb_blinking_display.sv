@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module tb_blinking_display;
 
   logic [3:0] anode_in; // 4-bit anode input

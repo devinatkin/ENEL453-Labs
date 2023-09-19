@@ -9,8 +9,8 @@ set_property PACKAGE_PIN W5 [get_ports clk]
 	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clk]
  
 ## switches
-set_property PACKAGE_PIN V17 [get_ports {mode_sw}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {mode_sw}]
+# set_property PACKAGE_PIN V17 [get_ports {mode_sw}]					
+# 	set_property IOSTANDARD LVCMOS33 [get_ports {mode_sw}]
 set_property PACKAGE_PIN V16 [get_ports {softrst_btn}]					
 	set_property IOSTANDARD LVCMOS33 [get_ports {softrst_btn}]
 set_property PACKAGE_PIN W16 [get_ports {inc_sw}]					

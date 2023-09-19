@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module blinking_display (
     input wire [3:0] anode_in,  // 4-bit anode input
     input wire clk,             // System clock
