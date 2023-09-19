@@ -26,6 +26,7 @@ module tb_timer;
     .reset(reset),
     .inc_min(inc_min),
     .inc_sec(inc_sec),
+    .inc(1'b1),
     .minutes(minutes),
     .seconds(seconds),
     .blink(blink)
@@ -37,10 +38,10 @@ module tb_timer;
         #5 clk = 0;
     end
 
-    // Clock generation for 1KHz
+    // Clock generation for 1KHz (Sped up for simulation purposes)
     always begin
-        #500000 clk1k = 1;
-        #500000 clk1k = 0;
+        #5000 clk1k = 1;
+        #5000 clk1k = 0;
     end
 
 
@@ -59,7 +60,7 @@ module tb_timer;
 
     // Apply reset
     rst_n = 0;
-    #10 rst_n = 1;
+    #12 rst_n = 1;
 
     // Check if module is properly reset
     if (minutes !== 0 || seconds !== 0 || blink !== 0) begin
@@ -69,26 +70,42 @@ module tb_timer;
 
     // Set 3-second timer
     inc_sec = 1;
-    #10 inc_sec = 0;
-    inc_sec = 1;
-    #10 inc_sec = 0;
-    inc_sec = 1;
-    #10 inc_sec = 0;
+    #100 inc_sec = 0;
+    #100 inc_sec = 1;
+    #100 inc_sec = 0;
+    #100 inc_sec = 1;
+    #100 inc_sec = 0;
     en = 1;
-    #10 start = 1;
-    #10 start = 0;
-
-    // Wait for 3 seconds + some margin
-    #3050000;
+    #100 inc_sec = 0;
+    #100 inc_sec = 1;
+    #100 inc_sec = 0;
+    #100 inc_sec = 1;
+    #100 inc_sec = 0;   
+    #100 start = 1;
+    #100 start = 0;
 
     // Check if timer counted down to zero and blink is toggled
-    if (minutes !== 0 || seconds !== 0 || blink !== 1) begin
-      $display("Error: Timer did not count down properly!");
+    if (minutes !== 0 || seconds !== 5 || blink !== 0) begin
+      $display("Error: Timer did not count up properly!");
       $finish;
     end else begin
-      $display("Success: Timer counted down to zero and blink is toggled!");
+      $display("Success: The Timer Set Correctly!");
     end
 
+    // Wait for 6 seconds
+    #10000000;
+    #10000000;
+    #10000000;
+    #10000000;
+    #10000000;
+    #10000000;
+    if(minutes !== 0 || seconds !== 0 || blink !== 1) begin
+      $display("Error: Timer did not count down properly!");
+      $display("Current time is %d:%d", minutes, seconds);
+      $finish;
+    end else begin
+      $display("Success: The Timer Counted Correctly!");
+    end
     $finish;
   end
 

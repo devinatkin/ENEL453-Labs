@@ -63,7 +63,7 @@ module top(
         .clk(clk),
         .clk1k(clk1k),
         .rst_n(rst_n),
-        .en(1'b1),
+        .en(1'b0),
         .start(start),
         .stop(stop),
         .reset(softrst),
