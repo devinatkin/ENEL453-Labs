@@ -1,5 +1,8 @@
 `timescale 1ns / 1ps
 
+// This is a testbench for the timer module
+// It sets a 5-second timer and checks if it counts down properly
+
 module tb_timer;
 
   logic clk;

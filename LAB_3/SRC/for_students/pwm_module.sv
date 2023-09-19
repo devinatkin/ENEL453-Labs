@@ -18,15 +18,15 @@ logic [bit_width-1:0] counter;
 always_ff @(posedge clk)
 begin
     if (~rst_n) begin
-        counter <= (bit_width)'('d0);
-        pwm_out <= 1'b0;
+        counter <= (bit_width)'('d0);               // counter is reset to 0
+        pwm_out <= 1'b0;                            // pwm output is low when reset
     end else begin 
-        if (counter == max_value) begin
-            counter <= (bit_width)'('d0);
-        end else begin
+        if (counter == max_value) begin             // counter is reset to 0 when it reaches max_value
+            counter <= (bit_width)'('d0);          
+        end else begin                              // counter is incremented by 1
             counter <= counter + (bit_width)'('d1);
         end
-        pwm_out <= (counter <= duty);
+        pwm_out <= (counter <= duty);               // pwm output is high when counter is less than duty
     end
 end
 endmodule

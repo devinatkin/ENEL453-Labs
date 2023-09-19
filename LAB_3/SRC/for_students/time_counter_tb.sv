@@ -1,5 +1,26 @@
 `timescale 1ns / 1ps
 
+// This is a testbench for the time_counter module, which is a counter that
+// counts time in milliseconds, seconds and minutes.
+// The counter can count up or down and can be enabled or disabled.
+// The counter is incremented or decremented every millisecond.
+// The counter is reset when the reset signal is asserted.
+// The counter is incremented or decremented when the inc_sec or inc_min signals are asserted.
+// The counter is enabled when the en signal is asserted.
+// The counter counts up when the up_down signal is asserted and counts down when the up_down signal is de-asserted.
+// The counter is synchronized to the clk_1khz signal, which is a 1 kHz clock.
+// The counter is clocked by the clk_high_speed signal, which is a 100 MHz clock.
+
+// The testbench checks the following:
+// 1. The counter counts up for 5 minutes and then stops.
+// 2. The counter counts down for 3 minutes and 1 second and then stops.
+// 3. The counter stops when the en signal is de-asserted.
+// 4. The counter decrements seconds when the inc_sec signal is asserted.
+// 5. The counter decrements minutes when the inc_min signal is asserted.
+// 6. The counter increments seconds when the inc_sec signal is asserted.
+// 7. The counter increments minutes when the inc_min signal is asserted.
+// 8. The counter resets when the rst_n signal is asserted.
+
 module tb_time_counter;
 
   logic clk_1khz;

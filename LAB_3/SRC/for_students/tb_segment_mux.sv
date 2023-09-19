@@ -1,25 +1,28 @@
+// Testbench for 4-to-1 Segment Mux
+// Run through the mux selection and check if the output is as expected
+
 module tb_segment_mux;
 
     // Declare signals for testbench
-    logic clk;
-    logic rst_n;
-    logic [6:0] in0;
-    logic [6:0] in1;
-    logic [6:0] in2;
-    logic [6:0] in3;
-    logic [6:0] out_val;
-    logic [3:0] out_sel;
+    logic clk;          // Clock
+    logic rst_n;        // Reset
+    logic [6:0] in0;        // Input 0
+    logic [6:0] in1;        // Input 1
+    logic [6:0] in2;        // Input 2
+    logic [6:0] in3;        // Input 3
+    logic [6:0] out_val;    // Output value
+    logic [3:0] out_sel;    // Output selection (One hot encoded)
 
     // Instantiate DUT (Device Under Test)
     segment_mux uut (
-        .clk(clk),
-        .rst_n(rst_n),
-        .in0(in0),
-        .in1(in1),
-        .in2(in2),
-        .in3(in3),
-        .out_val(out_val),
-        .out_sel(out_sel)
+        .clk(clk),      // Clock input (Increments through the selection possibilities)
+        .rst_n(rst_n),  // Reset input (Active low)
+        .in0(in0),      // Input 0
+        .in1(in1),      // Input 1
+        .in2(in2),      // Input 2
+        .in3(in3),      // Input 3
+        .out_val(out_val),  // Output value
+        .out_sel(out_sel)   // Output selection
     );
 
     // Clock generation

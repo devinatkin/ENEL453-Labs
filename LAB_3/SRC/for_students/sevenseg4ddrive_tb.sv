@@ -2,15 +2,15 @@
 
 module sevenseg4ddrive_tb;
 
-    logic clk;
-    logic rst_n;
-    logic [6:0] d0;
-    logic [6:0] d1;
-    logic [6:0] d2;
-    logic [6:0] d3;
+    logic clk;                  // 100 MHz clock
+    logic rst_n;                // Reset signal
+    logic [6:0] d0;             // Digit 0
+    logic [6:0] d1;             // Digit 1
+    logic [6:0] d2;             // Digit 2
+    logic [6:0] d3;             // Digit 3
     
-    logic [6:0] seg;
-    logic [3:0] an;
+    logic [6:0] seg;            // Segment outputs
+    logic [3:0] an;             // Anode outputs
 
     sevenseg4ddriver DUT(
     .clk(clk),
@@ -37,16 +37,17 @@ module sevenseg4ddrive_tb;
     initial begin
         // Initialize all inputs
         $display("Starting simulation...");
-        clk = 0;
-        rst_n=0;
-        d0 = 7'b0011000;
-        d1 = 7'b0011001;
-        d2 = 7'b0011010;
-        d3 = 7'b0011011;
+        clk = 0;            // 100 MHz clock
+        rst_n=0;            // Reset signal
+        d0 = 7'b0011000;    // Digit 0 set to 7'b0011000
+        d1 = 7'b0011001;    // Digit 1 set to 7'b0011001
+        d2 = 7'b0011010;    // Digit 2 set to 7'b0011010
+        d3 = 7'b0011011;    // Digit 3 set to 7'b0011011
         
-        #10; rst_n=1;
+        #12; rst_n=1;       // Release reset after 10 ns
 
-        #10000000;
+        // Wait for the anode to cycle through all 4 digits
+        #10000000;          
 
         #10000000;
 
