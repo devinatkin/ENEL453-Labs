@@ -31,7 +31,7 @@ module timer (
     .clk_1khz(clk1k),
     .clk_high_speed(clk),
     .rst_n(rst_n && !reset),
-    .up_down(inc),  // Count down instead of up
+    .up_down(inc && running),  // Count up or down when setting time, 1 = up, 0 = down, but only count down when running
     .en(en && running),
     .inc_sec(inc_sec),
     .inc_min(inc_min),

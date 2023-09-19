@@ -3,24 +3,21 @@
 create_project temp_project ./temp_project -part xc7a35tcpg236-1 -in_memory -force
 
 # Add source files (adjust paths and types as needed)
-read_verilog -sv ..\\SRC\\top_level.sv
-read_verilog -sv ..\\SRC\\timer.sv
-read_verilog -sv ..\\SRC\\time_counter.sv
-read_verilog -sv ..\\SRC\\stop_watch.sv
-read_verilog -sv ..\\SRC\\segment_mux.sv
-read_verilog -sv ..\\SRC\\one_second.sv
-read_verilog -sv ..\\SRC\\mode_mux.sv
-read_verilog -sv ..\\SRC\\display_driver.sv
+read_verilog -sv ..\\SRC\\for_students\\top_level.sv
+read_verilog -sv ..\\SRC\\for_students\\timer.sv
+read_verilog -sv ..\\SRC\\for_students\\time_counter.sv
+read_verilog -sv ..\\SRC\\for_students\\segment_mux.sv
+read_verilog -sv ..\\SRC\\for_students\\clock_divider.sv
+read_verilog -sv ..\\SRC\\for_students\\display_driver.sv
 read_verilog -sv ..\\SRC\\for_students\\sevenseg4ddriver.sv
 read_verilog -sv ..\\SRC\\for_students\\pwm_module.sv
-read_verilog -sv ..\\SRC\\bcd_binary.sv
-read_verilog -sv ..\\SRC\\debounce_wrapper.sv
-read_verilog -sv ..\\SRC\\stopwatch_timer_wrapper.sv
+read_verilog -sv ..\\SRC\\for_students\\bcd_binary.sv
+read_verilog -sv ..\\SRC\\for_students\\debounce_wrapper.sv
 read_verilog -sv ..\\SRC\\for_students\\debounce.sv
 read_verilog -sv ..\\SRC\\for_students\\double_dabble.sv
-read_verilog -sv ..\\SRC\\blinking_display.sv
+read_verilog -sv ..\\SRC\\for_students\\blinking_display.sv
 
-read_xdc ..\\SRC\\Basys3_Lab3_Provided_Constraints.xdc
+read_xdc ..\\SRC\\for_students\\Basys3_Lab3_Provided_Constraints.xdc
 
 set_property top top [current_fileset]
 # Launch synthesis
@@ -49,7 +46,7 @@ report_utilization -hierarchical -file utilization_hierarchical.rpt
 write_bitstream bitstream.bit -force
 
 open_hw_manager
-connect_hw_server -url 10.13.64.168:3121
+connect_hw_server -url 127.0.0.1:3121
 refresh_hw_server
 open_hw_target
 

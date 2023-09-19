@@ -66,9 +66,10 @@ module top(
         .en(1'b1),
         .start(start),
         .stop(stop),
-        .reset(reset),
+        .reset(softrst),
         .inc_min(inc_min),
         .inc_sec(inc_sec),
+        .inc(inc_sw),
         .minutes(minutes),
         .seconds(seconds),
         .blink(blink)
