@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-| Date         : Tue Sep 19 14:41:37 2023
+| Date         : Tue Sep 19 15:11:28 2023
 | Host         : Devin-I2Sense running 64-bit major release  (build 9200)
 | Command      : report_utilization -hierarchical -file utilization_hierarchical.rpt
 | Design       : top
@@ -22,10 +22,10 @@ Table of Contents
 +--------------------------------------------+------------------+------------+------------+---------+------+-----+--------+--------+------------+
 |                  Instance                  |      Module      | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP Blocks |
 +--------------------------------------------+------------------+------------+------------+---------+------+-----+--------+--------+------------+
-| top                                        |            (top) |        208 |        208 |       0 |    0 | 295 |      0 |      0 |          0 |
+| top                                        |            (top) |        209 |        209 |       0 |    0 | 293 |      0 |      0 |          0 |
 |   (top)                                    |            (top) |          0 |          0 |       0 |    0 |   0 |      0 |      0 |          0 |
 |   blink_disp                               | blinking_display |          1 |          1 |       0 |    0 |   6 |      0 |      0 |          0 |
-|   clock_divider_inst                       |    clock_divider |         17 |         17 |       0 |    0 |  46 |      0 |      0 |          0 |
+|   clock_divider_inst                       |    clock_divider |         18 |         18 |       0 |    0 |  44 |      0 |      0 |          0 |
 |   debounce_wrapper                         | debounce_wrapper |         85 |         85 |       0 |    0 | 110 |      0 |      0 |          0 |
 |     debounce_instances[0].generic_debounce |         debounce |         17 |         17 |       0 |    0 |  22 |      0 |      0 |          0 |
 |     debounce_instances[1].generic_debounce |       debounce_1 |         17 |         17 |       0 |    0 |  22 |      0 |      0 |          0 |
@@ -39,9 +39,9 @@ Table of Contents
 |     seg_driver                             | sevenseg4ddriver |         34 |         34 |       0 |    0 |  19 |      0 |      0 |          0 |
 |       clk_reducer                          |       pwm_module |          8 |          8 |       0 |    0 |  15 |      0 |      0 |          0 |
 |       persistence_mux                      |      segment_mux |         26 |         26 |       0 |    0 |   4 |      0 |      0 |          0 |
-|   timer_module                             |            timer |         47 |         47 |       0 |    0 |  28 |      0 |      0 |          0 |
+|   timer_module                             |            timer |         48 |         48 |       0 |    0 |  28 |      0 |      0 |          0 |
 |     (timer_module)                         |            timer |          2 |          2 |       0 |    0 |   3 |      0 |      0 |          0 |
-|     timer                                  |     time_counter |         45 |         45 |       0 |    0 |  25 |      0 |      0 |          0 |
+|     timer                                  |     time_counter |         46 |         46 |       0 |    0 |  25 |      0 |      0 |          0 |
 +--------------------------------------------+------------------+------------+------------+---------+------+-----+--------+--------+------------+
 * Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
 

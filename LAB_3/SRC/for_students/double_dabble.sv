@@ -40,10 +40,10 @@ module doubleDabble(
     always_ff @(posedge clk)
     begin
         if(rst) begin
-            scratch = 0;
-            bcd = 0;
-            ready = 1;
-            clkcnt = 0;
+            scratch <= 0;
+            bcd <= 0;
+            ready <= 1;
+            clkcnt <= 0;
         end else if(clk) begin
             //Check If Ready
             if(scratch[29:26] >= 5) begin //Add to any bcd which is >= 5

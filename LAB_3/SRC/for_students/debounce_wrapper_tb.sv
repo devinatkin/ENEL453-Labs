@@ -1,3 +1,6 @@
+// Testbench for Debounce Wrapper
+// This is a very simple testbench because the debouncer itself is debugged in the testbench for the debouncer module. So this testbench is just to make sure that the wrapper is working properly.
+
 module tb_debounce_wrapper;
 
     typedef enum {Resetting, Bouncing, Stable, Completed, Failed} StateType;
@@ -8,25 +11,25 @@ module tb_debounce_wrapper;
     time clock_period = 10ns;
 
     // Inputs
-    logic clk;
-    logic [4:0] buttons; // For multiple buttons
-    logic reset_n;
+    logic clk;              // Clock
+    logic [4:0] buttons;    // For multiple buttons
+    logic reset_n;          // Reset
 
     // Outputs
-    wire [4:0] results; // For multiple debounced results
+    wire [4:0] results;     // For multiple debounced results
 
-    logic error = 0;
-    StateType Test_State;
+    logic error = 0;        // Error flag
+    StateType Test_State;   // Test State       
 
     // Instantiate the Unit Under Test (UUT)
     debounce_wrapper uut (
-        .clk(clk), 
-        .rst_n(reset_n), 
-        .buttons(buttons), 
-        .results(results)
+        .clk(clk),          // Clock
+        .rst_n(reset_n),    // Reset
+        .buttons(buttons),  // For multiple buttons
+        .results(results)   // For multiple debounced results
     );
 
-    always begin
+    always begin            // Clock generator
         #(clock_period/2);
         clk = 1;
         #(clock_period/2);

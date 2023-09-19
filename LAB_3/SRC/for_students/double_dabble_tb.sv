@@ -1,5 +1,6 @@
 `timescale 1ns / 1ps
-
+// 14-bit Binary to BCD Converter
+// This testbench is used to test the double dabble module, It cycles through all the numbers from 0 to 9999 and checks if the output is correct.
 module double_dabble_tb();
 logic clk;
 logic rst;
@@ -27,8 +28,7 @@ initial begin
                 $display("BCD Output: %b %b %b %b",bcd[15:12],bcd[11:8],bcd[7:4],bcd[3:0]);
                 $display("Number Output: %d",bcd_to_bin);
                 bin <= bin + 1;
-                //$finish;
-            end 
+            end
             
         end
         clkcnt= clkcnt + 1;

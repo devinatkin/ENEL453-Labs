@@ -1,16 +1,22 @@
 `timescale 1ns / 1ns
 
+// This is a testbench for the display_driver module. I'm going to recommend you take this module at faith as it can be annoying to simulate.
+// This is because it has to account for the need to cycle through the anodes and the need to hold the display for a certain amount of time.
+
+
 module tb_display_driver();
 
     // Declare signals to connect to the display_driver module
-    logic clk;
-    logic rst_n;
-    logic [5:0] minutes;
-    logic [5:0] seconds;
-    wire [6:0] seg;
-    wire [3:0] an;
+    logic clk;              // 100MHz clock (Lower frequency clocks are generated internal to the display_driver module)
+    logic rst_n;            // Active low reset
+    logic [5:0] minutes;    // 6-bit minutes value
+    logic [5:0] seconds;    // 6-bit seconds value
+    wire [6:0] seg;         // 7-bit segment value
+    wire [3:0] an;          // 4-bit anode value
 
-    logic [31:0] displayHold;
+    logic [31:0] displayHold;   // 32-bit value to hold the display for a certain amount of time
+
+
     // Instantiate the display_driver module
     display_driver uut (
         .clk(clk),
@@ -57,7 +63,7 @@ module tb_display_driver();
         rst_n = 1;
         #100;
 
-        while (minutes < 6'd60) begin // wait for minutes to be 60
+        while (minutes < 6'd60) begin // wait for minutes to be 60 before ending simulation (This is a long time to wait, especially given the simulation runs slower than real time)
             #100;
         end
         $finish;

@@ -3,15 +3,15 @@
 module tb_top();
 
     // Declare the signals to connect to the top module
-    reg clk;
-    reg rst;
-    reg start_btn;
-    reg stop_btn;
-    reg softrst_btn;
-    reg inc_min_btn;
-    reg inc_sec_btn;
-    reg mode_sw;
-    reg sw_inc;
+    logic clk;
+    logic rst;
+    logic start_btn;
+    logic stop_btn;
+    logic softrst_btn;
+    logic inc_min_btn;
+    logic inc_sec_btn;
+    logic mode_sw;
+    logic sw_inc;
     wire [6:0] seg;
     wire [3:0] an;
 

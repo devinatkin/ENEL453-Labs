@@ -2,7 +2,7 @@ set_property SRC_FILE_INFO {cfile:C:/Users/devin/Desktop/ENEL453_Labs/LAB_3/SRC/
 set_property src_info {type:XDC file:1 line:7 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN W5 [get_ports clk]
 set_property src_info {type:XDC file:1 line:14 export:INPUT save:INPUT read:READ} [current_design]
-set_property PACKAGE_PIN V16 [get_ports {softrst_btn}]
+set_property PACKAGE_PIN V16 [get_ports {softrst_sw}]
 set_property src_info {type:XDC file:1 line:16 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN W16 [get_ports {inc_sw}]
 set_property src_info {type:XDC file:1 line:82 export:INPUT save:INPUT read:READ} [current_design]
