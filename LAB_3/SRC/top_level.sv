@@ -1,18 +1,18 @@
 `timescale 1ns / 1ps
 
 module top(
-        input wire clk,
-        input wire rst,
-        input wire start_btn,
-        input wire stop_btn,
-        input wire softrst_btn,
-        input wire inc_min_btn,
-        input wire inc_sec_btn,
-        input wire mode_sw,
-        output wire [6:0] seg,
-        output wire [3:0] an
+        input wire clk,                 // 100 MHz clock
+        input wire rst,                 // Reset button (Tied to Center Button)
+        input wire start_btn,           // Start button (Tied to Up Button)
+        input wire stop_btn,            // Stop button (Tied to left Button)
+        input wire softrst_sw,          // Software reset switch (Tied to SW1)         
+        input wire inc_min_btn,         // Increment minutes button (Tied to down Button)
+        input wire inc_sec_btn,         // Increment seconds button (Tied to right Button)
+        input wire inc_sw,              // Increment switch (Tied to SW2, Determines if buttons increment or decrement the timer)
+        input wire mode_sw,             // Mode switch (Tied to SW0, Determines if the timer counts up or down)
+        output wire [6:0] seg,          // 7-segment display output wire (Tied to the 7-segment display, active low)
+        output wire [3:0] an            // 4-bit anode output wire (Tied to the 7-segment display, active low)
     );
-
     wire clk_1Hz;
     wire clk_1kHz;
     
@@ -35,7 +35,7 @@ module top(
     // Instantiate the clock divider
     clock_divider clock_divider_inst(
         .clk_100MHz(clk),
-        .rst_n(!rst),
+        .rst_n(rst_n ),
         .clk_1Hz(clk_1Hz),
         .clk_1kHz(clk_1kHz)
     );
@@ -65,9 +65,10 @@ module top(
         .mode_sw(mode_sw),
         .start(start),
         .stop(stop),
-        .reset(reset),
+        .reset(softrst_sw),
         .inc_min(inc_min),
         .inc_sec(inc_sec),
+        .inc_sw(inc_sw),
         .minutes(minutes),
         .seconds(seconds),
         .blink(blink)
