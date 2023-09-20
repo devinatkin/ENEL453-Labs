@@ -2,7 +2,8 @@
 
 // This is a testbench for the timer module
 // It sets a 5-second timer and checks if it counts down properly
-
+// This testbench is simple because the primary functionality of the timer is tested in the time counter module testbench
+// This testbench only needs to check that the timer can accept a time and then run down. 
 module tb_timer;
 
   logic clk;
