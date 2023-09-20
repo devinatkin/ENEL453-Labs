@@ -14,18 +14,18 @@ module tb_pwm_module;
   // Outputs
   wire pwm_out;                                             // PWM output
 
-  // Variables
-time previous_duty_out_rise=0;                              // Time of the previous rising edge of the duty cycle output
-time previous_duty_out_fall=0;                              // Time of the previous falling edge of the duty cycle output
-time period=0;                                              // Period of the PWM signal
-time time_high=0;                                           // Time the PWM signal is high
-time time_low=0;                                            // Time the PWM signal is low                                    
-time current_time=0;                                        // Current simulation time
-time previous_period=0;                                     // Period of the previous PWM signal
+    // Variables
+  time previous_duty_out_rise=0;                              // Time of the previous rising edge of the duty cycle output
+  time previous_duty_out_fall=0;                              // Time of the previous falling edge of the duty cycle output
+  time period=0;                                              // Period of the PWM signal
+  time time_high=0;                                           // Time the PWM signal is high
+  time time_low=0;                                            // Time the PWM signal is low                                    
+  time current_time=0;                                        // Current simulation time
+  time previous_period=0;                                     // Period of the previous PWM signal
 
-real calculated_duty = 1;
-real calculated_intendedduty=  1;
-real error = 1;
+  real calculated_duty = 1;
+  real calculated_intendedduty=  1;
+  real error = 1;
   // Instantiate the DUT (Device Under Test)
   pwm_module #(
     .bit_width(bit_width)
