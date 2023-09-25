@@ -51,23 +51,43 @@ module CRC_CALC(
             // HDL is just a way of describing hardware.
 
             // CDMA2000 CRC-16 Polynomial 16'hC867 as opposed to the XMODEM CRC-16 Polynomial 16'h1021
-
+            // 1100 1000 0110 0111
             CRC_REG[15] <= CRC_REG[14] ^ CRC_REG[15];
             CRC_REG[14] <= CRC_REG[13] ^ CRC_REG[15];
             CRC_REG[13] <= CRC_REG[12];
-            CRC_REG[12] <= CRC_REG[11];               // XOR the MSB of the CRC Register with the LSB of the CRC Register and Shift it into the CRC Register
+            CRC_REG[12] <= CRC_REG[11];
+
             CRC_REG[11] <= CRC_REG[10] ^ CRC_REG[15];
             CRC_REG[10] <= CRC_REG[9];
             CRC_REG[9] <= CRC_REG[8];
             CRC_REG[8] <= CRC_REG[7];
+
             CRC_REG[7] <= CRC_REG[6];
             CRC_REG[6] <= CRC_REG[5] ^ CRC_REG[15];
-            CRC_REG[5] <= CRC_REG[4] ^ CRC_REG[15];                 // XOR the MSB of the CRC Register with the 4th Bit of the CRC Register and Shift it into the CRC Register
+            CRC_REG[5] <= CRC_REG[4] ^ CRC_REG[15];               
             CRC_REG[4] <= CRC_REG[3];
+
             CRC_REG[3] <= CRC_REG[2];
             CRC_REG[2] <= CRC_REG[1] ^ CRC_REG[15];
             CRC_REG[1] <= CRC_REG[0] ^ CRC_REG[15];
-            CRC_REG[0] <= CRC_REG[15] ^ DATA_IN;                     // XOR the MSB of the CRC Register with the Data In and Shift it into the CRC Register
+            CRC_REG[0] <= DATA_IN ^ CRC_REG[15];    
+
+            // CRC_REG[15] <= CRC_REG[14];
+            // CRC_REG[14] <= CRC_REG[13];
+            // CRC_REG[13] <= CRC_REG[12];
+            // CRC_REG[12] <= CRC_REG[11] ^ CRC_REG[15];               // XOR the MSB of the CRC Register with the LSB of the CRC Register and Shift it into the CRC Register
+            // CRC_REG[11] <= CRC_REG[10];
+            // CRC_REG[10] <= CRC_REG[9];
+            // CRC_REG[9] <= CRC_REG[8];
+            // CRC_REG[8] <= CRC_REG[7];
+            // CRC_REG[7] <= CRC_REG[6];
+            // CRC_REG[6] <= CRC_REG[5];
+            // CRC_REG[5] <= CRC_REG[4] ^ CRC_REG[15];                 // XOR the MSB of the CRC Register with the 4th Bit of the CRC Register and Shift it into the CRC Register
+            // CRC_REG[4] <= CRC_REG[3];
+            // CRC_REG[3] <= CRC_REG[2];
+            // CRC_REG[2] <= CRC_REG[1];
+            // CRC_REG[1] <= CRC_REG[0];
+            // CRC_REG[0] <= CRC_REG[15] ^ DATA_IN;                     // XOR the MSB of the CRC Register with the Data In and Shift it into the CRC Register                 
         end
     end
     
