@@ -30,17 +30,19 @@ module CRC_CALC(
     logic [15:0] CRC_REG;
     
     // CRC Polynomial (XMODEM) 16'h1021
-    
+    logic [15:0] CRC_INIT;
     // CRC Calculation
     always_ff @(posedge CLK) begin
         if (!RESET_N) begin                                         // Active Low Synchronous Reset
-            CRC_REG <= 16'hFFFF;                                    // Reset the CRC Register to 0
+            CRC_REG <= 16'h0000;                                    // Reset the CRC Register to 0
             CRC_OUT <= 1'b0;                                        // Reset the CRC Output to 0
+            CRC_INIT <= 16'hFFFF;                                   // Set the CRC Init to 16'hFFFF (This XORs with the first 2 bytes)
+
         end else if (READ_MODE) begin                               // If the CRC is in Read Mode, Output the CRC Register, One Bit at a Time
 
             CRC_OUT <= CRC_REG[15];                                 // Output the MSB of the CRC Register
-            CRC_REG <= {CRC_REG[14:0], 1'b1};                       // Shift the CRC Register Left by One Bit
-            
+            CRC_REG <= {CRC_REG[14:0], 1'b0};                       // Shift the CRC Register Left by One Bit
+            CRC_INIT <= 16'hFFFF;                                   // Set the CRC Init to 16'hFFFF (This XORs with the first 2 bytes)
 
         end else begin                                              // If the CRC is in Write Mode, Calculate the CRC Register while Shifting in the Data
 
@@ -70,24 +72,10 @@ module CRC_CALC(
             CRC_REG[3] <= CRC_REG[2];
             CRC_REG[2] <= CRC_REG[1] ^ CRC_REG[15];
             CRC_REG[1] <= CRC_REG[0] ^ CRC_REG[15];
-            CRC_REG[0] <= DATA_IN ^ CRC_REG[15];    
+            CRC_REG[0] <= DATA_IN ^ CRC_REG[15] ^ CRC_INIT[15];      // XOR the MSB of the CRC Register with the Data In and Shift it into the CRC Register
 
-            // CRC_REG[15] <= CRC_REG[14];
-            // CRC_REG[14] <= CRC_REG[13];
-            // CRC_REG[13] <= CRC_REG[12];
-            // CRC_REG[12] <= CRC_REG[11] ^ CRC_REG[15];               // XOR the MSB of the CRC Register with the LSB of the CRC Register and Shift it into the CRC Register
-            // CRC_REG[11] <= CRC_REG[10];
-            // CRC_REG[10] <= CRC_REG[9];
-            // CRC_REG[9] <= CRC_REG[8];
-            // CRC_REG[8] <= CRC_REG[7];
-            // CRC_REG[7] <= CRC_REG[6];
-            // CRC_REG[6] <= CRC_REG[5];
-            // CRC_REG[5] <= CRC_REG[4] ^ CRC_REG[15];                 // XOR the MSB of the CRC Register with the 4th Bit of the CRC Register and Shift it into the CRC Register
-            // CRC_REG[4] <= CRC_REG[3];
-            // CRC_REG[3] <= CRC_REG[2];
-            // CRC_REG[2] <= CRC_REG[1];
-            // CRC_REG[1] <= CRC_REG[0];
-            // CRC_REG[0] <= CRC_REG[15] ^ DATA_IN;                     // XOR the MSB of the CRC Register with the Data In and Shift it into the CRC Register                 
+            CRC_INIT <= {CRC_INIT[14:0], 1'b0};        // Shift the CRC Init Left by One Bit 
+          
         end
     end
     

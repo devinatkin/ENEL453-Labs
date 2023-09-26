@@ -51,7 +51,7 @@ module tb_CRC_CALC;
 
     // Shift in 16 zeros to complete the CRC calculation
     for (int i = 0; i < 16; i++) begin
-      DATA_IN = 1;
+      DATA_IN = 0;
       #10; // Wait for one clock cycle
     end
 
