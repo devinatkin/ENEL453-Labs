@@ -34,7 +34,7 @@ module CRC_CALC(
     // CRC Calculation
     always_ff @(posedge CLK) begin
         if (!RESET_N) begin                                         // Active Low Synchronous Reset
-            CRC_REG <= 16'hFFFF;                                    // Reset the CRC Register to 0
+            CRC_REG <= 16'h9e9e;                                    // Reset the CRC Register to 0
             CRC_OUT <= 1'b0;                                        // Reset the CRC Output to 0
         end else if (READ_MODE) begin                               // If the CRC is in Read Mode, Output the CRC Register, One Bit at a Time
 

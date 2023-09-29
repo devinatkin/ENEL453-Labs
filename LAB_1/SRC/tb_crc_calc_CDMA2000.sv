@@ -31,14 +31,14 @@ module tb_CRC_CALC;
 
   initial begin
     // Declare a string to be used for CRC calculation
-    static string message = "Hello, CRC!";
+    static string message = "aa";
 
     // Declare a variable to hold the calculated CRC
     logic [15:0] calculated_crc;
 
     // Initialize the signals
     
-    #10 RESET_N = 1;
+    #12.5 RESET_N = 1;
 
     // Shift in the string one bit at a time
     for (int i = 0; i < message.len(); i++) begin
@@ -51,15 +51,16 @@ module tb_CRC_CALC;
 
     // Shift in 16 zeros to complete the CRC calculation
     for (int i = 0; i < 16; i++) begin
-      DATA_IN = 1;
+      DATA_IN = 0;
       #10; // Wait for one clock cycle
     end
 
     // Shift out the calculated CRC
     READ_MODE = 1;
     for (int i = 15; i >= 0; i--) begin
-      #10; // Wait for one clock cycle
-      calculated_crc[i] = CRC_OUT;
+        #10; // Wait for one clock cycle
+        calculated_crc[i] = CRC_OUT;
+      
     end
 
     // Print the original message and the calculated CRC value in hex
