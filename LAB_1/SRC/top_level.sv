@@ -6,7 +6,7 @@ module top_level (
 );
 
     // CRC Output Signal
-    wire CRC_OUT;
+    logic CRC_OUT;
 
     // Data Input Signal for CRC Calculation
     reg DATA_IN;

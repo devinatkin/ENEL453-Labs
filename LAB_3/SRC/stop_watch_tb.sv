@@ -9,8 +9,8 @@ module stop_watch_tb;
   logic start;
   logic stop;
   logic reset;
-  wire [5:0] minutes;
-  wire [5:0] seconds;
+  logic [5:0] minutes;
+  logic [5:0] seconds;
 
   // Instantiate the DUT (Device Under Test)
   stopwatch my_stopwatch (

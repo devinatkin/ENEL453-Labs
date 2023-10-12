@@ -12,8 +12,8 @@ module tb_top();
     reg inc_sec_btn;
     reg mode_sw;
 
-    wire [6:0] seg;
-    wire [3:0] an;
+    logic [6:0] seg;
+    logic [3:0] an;
 
     // Clock Generation
     always #5 clk = ~clk;  // 10ns clock period (for a 100MHz clock)

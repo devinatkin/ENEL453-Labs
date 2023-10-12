@@ -21,7 +21,7 @@ module stopwatch_timer_wrapper (
     logic [5:0] minutes_tm;
     logic [5:0] seconds_tm;
 
-    wire blnk;
+    logic blnk;
     assign blink = blnk && !mode_sw;
     // Instantiate the stopwatch module
     stopwatch my_stopwatch (

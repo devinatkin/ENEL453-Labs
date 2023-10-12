@@ -33,7 +33,7 @@ module tb_top_level;
   logic clk;
   logic rst;
   logic [15:0] switches;
-  wire led;
+  logic led;
   integer i;
   integer file_descriptor;
   // Instantiate the top_level module
