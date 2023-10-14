@@ -63,7 +63,7 @@ module tb_display_driver();
         rst_n = 1;
         #100;
 
-        while (minutes < 6'd60) begin // wait for minutes to be 60 before ending simulation (This is a long time to wait, especially given the simulation runs slower than real time)
+        while (minutes < 6'd60) begin // wait for minutes to be 60 before ending simulation (This is a long time to wait)
             #100;
         end
         $finish;

@@ -1,1 +1,1 @@
--debug "typical" -top "tb_debounce" -snapshot "debounce_tb_snapshot" 
+-debug "typical" -top "tb_debounce_wrapper" -snapshot "debounce_tb_snapshot" 

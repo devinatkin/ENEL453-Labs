@@ -10,7 +10,6 @@ module tb_top();
     logic softrst_btn;
     logic inc_min_btn;
     logic inc_sec_btn;
-    logic mode_sw;
     logic sw_inc;
     logic [6:0] seg;
     logic [3:0] an;
@@ -31,11 +30,10 @@ module tb_top();
         .rst(rst),
         .start_btn(start_btn),
         .stop_btn(stop_btn),
-        .softrst_btn(softrst_btn),
+        .softrst_sw(softrst_btn),
         .inc_min_btn(inc_min_btn),
         .inc_sec_btn(inc_sec_btn),
         .inc_sw(sw_inc),
-        .mode_sw(mode_sw),
         .seg(seg),
         .an(an)
     );
@@ -50,15 +48,13 @@ module tb_top();
         softrst_btn = 0;
         inc_min_btn = 0;
         inc_sec_btn = 0;
-        mode_sw = 0;
         sw_inc = 0;
         // Reset pulse
         rst = 1;
         #10000 rst = 0;
 
         // Test different modes
-        mode_sw = 1;
-        #100 mode_sw = 0;
+        #100 
 
         // Increment minutes and seconds
         inc_min_btn = 1;
