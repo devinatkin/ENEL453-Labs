@@ -14,7 +14,7 @@ module tb_top_level;
   // Define the switches signal
   logic [15:0] SWITCHES;
 
-  // Define the LEDs wire
+  // Define the LEDs logic
   logic [15:0] LEDS;
 
   // Instantiate the top_level module

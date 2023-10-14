@@ -1,21 +1,21 @@
 `timescale 1ns / 1ps
 
 module stopwatch (
-  input wire clk,      // Clock input 100Mhz
-  input wire clk1k,  // Clock input 1Khz
-  input wire rst_n,    // Active low asynchronous reset
-  input wire en,       // Enable the stopwatch
-  input wire start,    // Start the stopwatch
-  input wire stop,     // Stop the stopwatch
-  input wire reset,    // Reset the stopwatch
+  input logic clk,      // Clock input 100Mhz
+  input logic clk1k,  // Clock input 1Khz
+  input logic rst_n,    // Active low asynchronous reset
+  input logic en,       // Enable the stopwatch
+  input logic start,    // Start the stopwatch
+  input logic stop,     // Stop the stopwatch
+  input logic reset,    // Reset the stopwatch
   output logic [5:0] minutes, // Minutes
   output logic [5:0] seconds // Seconds
 );
 
   logic running; // Flag to indicate if the stopwatch is running
-  wire [9:0] time_ms;
-  wire [5:0] time_sec;
-  wire [5:0] time_min;
+  logic [9:0] time_ms;
+  logic [5:0] time_sec;
+  logic [5:0] time_min;
   assign minutes = time_min;
   assign seconds = time_sec;
     time_counter timer (

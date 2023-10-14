@@ -32,7 +32,7 @@ module tb_top_level;
   logic clk;
   logic reset;
   logic [15:0] switches;
-  wire [15:0] led; // Change to 16 bits to match the top_level module
+  logic [15:0] led; // Change to 16 bits to match the top_level module
   integer i;
   integer file_descriptor;
 

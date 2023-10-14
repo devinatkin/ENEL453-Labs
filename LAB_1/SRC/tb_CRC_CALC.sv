@@ -17,7 +17,7 @@ module tb_CRC_CALC;
   // Define the read mode signal
   logic READ_MODE = 0;
 
-  // Define the CRC output wire
+  // Define the CRC output logic
   logic CRC_OUT;
 
   // Instantiate the CRC_CALC module

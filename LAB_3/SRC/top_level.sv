@@ -1,36 +1,36 @@
 `timescale 1ns / 1ps
 
 module top(
-        input wire clk,                 // 100 MHz clock
-        input wire rst,                 // Reset button (Tied to Center Button)
-        input wire start_btn,           // Start button (Tied to Up Button)
-        input wire stop_btn,            // Stop button (Tied to left Button)
-        input wire softrst_sw,          // Software reset switch (Tied to SW1)         
-        input wire inc_min_btn,         // Increment minutes button (Tied to down Button)
-        input wire inc_sec_btn,         // Increment seconds button (Tied to right Button)
-        input wire inc_sw,              // Increment switch (Tied to SW2, Determines if buttons increment or decrement the timer)
-        input wire mode_sw,             // Mode switch (Tied to SW0, Determines if the timer counts up or down)
-        output wire [6:0] seg,          // 7-segment display output wire (Tied to the 7-segment display, active low)
-        output wire [3:0] an            // 4-bit anode output wire (Tied to the 7-segment display, active low)
+        input logic clk,                 // 100 MHz clock
+        input logic rst,                 // Reset button (Tied to Center Button)
+        input logic start_btn,           // Start button (Tied to Up Button)
+        input logic stop_btn,            // Stop button (Tied to left Button)
+        input logic softrst_sw,          // Software reset switch (Tied to SW1)         
+        input logic inc_min_btn,         // Increment minutes button (Tied to down Button)
+        input logic inc_sec_btn,         // Increment seconds button (Tied to right Button)
+        input logic inc_sw,              // Increment switch (Tied to SW2, Determines if buttons increment or decrement the timer)
+        input logic mode_sw,             // Mode switch (Tied to SW0, Determines if the timer counts up or down)
+        output logic [6:0] seg,          // 7-segment display output logic (Tied to the 7-segment display, active low)
+        output logic [3:0] an            // 4-bit anode output logic (Tied to the 7-segment display, active low)
     );
-    wire clk_1Hz;
-    wire clk_1kHz;
+    logic clk_1Hz;
+    logic clk_1kHz;
     
-    wire blink;
+    logic blink;
 
-    wire [5:0] minutes;
-    wire [5:0] seconds;
+    logic [5:0] minutes;
+    logic [5:0] seconds;
 
-    wire start;
-    wire stop;
-    wire softrst;
-    wire inc_min;
-    wire inc_sec;
+    logic start;
+    logic stop;
+    logic softrst;
+    logic inc_min;
+    logic inc_sec;
 
-    wire [3:0] anode_raw;
+    logic [3:0] anode_raw;
     
 
-    wire rst_n;
+    logic rst_n;
     assign rst_n = !rst;
     // Instantiate the clock divider
     clock_divider clock_divider_inst(
