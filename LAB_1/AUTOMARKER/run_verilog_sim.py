@@ -1,4 +1,35 @@
 import subprocess
+import re
+
+def extract_message_and_crc(log: str) -> tuple:
+    """
+    Extract the original message and the calculated CRC value from the given simulation log.
+    
+    Parameters:
+    - log (str): The log text where the information resides.
+    
+    Returns:
+    - tuple: A tuple containing the original message and the calculated CRC value as strings.
+    """
+    
+    # Regular expression pattern to find the original message
+    message_pattern = r"Original Message: (.+?)\n"
+    
+    # Regular expression pattern to find the calculated CRC in Hex
+    crc_pattern = r"Calculated CRC \(Hex\): (.+?)\n"
+    
+    # Search for the patterns in the log
+    message_match = re.search(message_pattern, log)
+    crc_match = re.search(crc_pattern, log)
+    
+    # Extract the required information if matches are found
+    if message_match and crc_match:
+        original_message = message_match.group(1)
+        calculated_crc = crc_match.group(1)
+        return original_message, calculated_crc
+    else:
+        return "Message or CRC not found in the log", "Message or CRC not found in the log"
+
 
 def run_verilog_sim(verilog_files, top_module):
     try:
@@ -44,3 +75,8 @@ if __name__ == '__main__':
     print("------------------------------------")
     print(output)
     print("------------------------------------")
+
+    # Extract the message and CRC from the output
+    message, crc = extract_message_and_crc(output)
+    print(f"Message: {message}")
+    print(f"CRC: {crc}")
