@@ -106,3 +106,7 @@ top_level_propImpl.xdc
 **/xsim.mem
 temp/
 marking.csv
+xelab.pb
+xsim_script.tcl
+xvlog.pb
+Compile_Options.txt
