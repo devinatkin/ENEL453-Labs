@@ -104,3 +104,5 @@ post_synth.dcp
 utilization_hierarchical.rpt
 top_level_propImpl.xdc
 **/xsim.mem
+temp/
+marking.csv
