@@ -1,0 +1,13 @@
+version: '3'
+services:
+  python_led_display_site:
+    build: Dockerfile
+    ports:
+      - "5000:5000"
+
+  envoy:
+    build: Dockerfile.envoy
+    ports:
+      - "8080:8080"
+    depends_on:
+      - python_led_display_site
