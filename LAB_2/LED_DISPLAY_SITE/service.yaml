@@ -1,0 +1,21 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+     run.googleapis.com/launch-stage: BETA
+  name: enel453-led-display
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/execution-environment: gen1 #or gen2
+    spec:
+      containers:
+      - image: INGRESS_IMAGE
+        ports:
+          - containerPort: 8080
+      - image: gcr.io/atkin-1/enel453_labs:latest
+        env:
+          - name: PORT
+            value: "5000"
+      
