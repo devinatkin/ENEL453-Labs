@@ -9,6 +9,7 @@ spec:
     metadata:
       annotations:
         run.googleapis.com/execution-environment: gen1 #or gen2
+        run.googleapis.com/container-dependencies: "{envoy: [python-app]}"
     spec:
       containers:
       - image: gcr.io/atkin-1/enel453_labs_envoy:latest
