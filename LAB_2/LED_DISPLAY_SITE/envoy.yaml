@@ -18,12 +18,10 @@ static_resources:
               routes:
               - match: { prefix: "/" }
                 route: { cluster: service }
-          http_filters:
-          - name: envoy.filters.http.router
   clusters:
   - name: service
-    connect_timeout: 0.25s
-    type: strict_dns
+    connect_timeout: 1s
+    type: logical_dns
     lb_policy: round_robin
     load_assignment:
       cluster_name: service

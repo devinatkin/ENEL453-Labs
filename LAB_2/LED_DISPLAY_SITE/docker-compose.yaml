@@ -1,6 +1,6 @@
 version: '3'
 services:
-  python_led_display_site:
+  python-app:
     build: Dockerfile
     ports:
       - "5000:5000"
@@ -13,4 +13,4 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - python_led_display_site
+      - python-app
