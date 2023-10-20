@@ -30,7 +30,7 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: ledsite
+                address: localhost
                 port_value: 5000
     circuit_breakers:  # Add the circuit_breakers section here
       thresholds:

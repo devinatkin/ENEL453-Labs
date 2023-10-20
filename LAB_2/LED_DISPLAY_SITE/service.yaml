@@ -8,9 +8,11 @@ spec:
   template:
     metadata:
       annotations:
+        autoscaling.knative.dev/maxScale: "8"
         run.googleapis.com/execution-environment: gen1 #or gen2
         run.googleapis.com/container-dependencies: "{envoy: [ledsite]}"
     spec:
+      containerConcurrency: 8
       containers:
       - image: gcr.io/atkin-1/enel453_labs_envoy:latest
         name: envoy
@@ -19,7 +21,7 @@ spec:
         resources:
           limits:
             cpu: 1000m
-            memory: 512Mi
+            memory: 1024Mi
       - image: gcr.io/atkin-1/enel453_labs:latest
         name: ledsite
         env:
@@ -28,5 +30,5 @@ spec:
         resources:
           limits:
             cpu: 1000m
-            memory: 512Mi
+            memory: 1024Mi
       
