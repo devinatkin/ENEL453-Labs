@@ -16,9 +16,17 @@ spec:
         name: envoy
         ports:
           - containerPort: 8080
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
       - image: gcr.io/atkin-1/enel453_labs:latest
         name: ledsite
         env:
           - name: PORT
             value: "5000"
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
       
