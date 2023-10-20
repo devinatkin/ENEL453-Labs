@@ -21,7 +21,7 @@ static_resources:
   clusters:
   - name: service
     connect_timeout: 1s
-    type: logical_dns
+    type: strict_dns
     lb_policy: round_robin
     load_assignment:
       cluster_name: service
@@ -32,3 +32,7 @@ static_resources:
               socket_address:
                 address: python-app
                 port_value: 5000
+    circuit_breakers:  # Add the circuit_breakers section here
+      thresholds:
+        - priority: DEFAULT
+          max_connections: 10  # Set max connections to 10
