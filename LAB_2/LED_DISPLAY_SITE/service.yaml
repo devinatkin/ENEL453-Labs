@@ -11,7 +11,7 @@ spec:
         run.googleapis.com/execution-environment: gen1 #or gen2
     spec:
       containers:
-      - image: INGRESS_IMAGE
+      - image: gcr.io/atkin-1/enel453_labs_envoy:latest
         ports:
           - containerPort: 8080
       - image: gcr.io/atkin-1/enel453_labs:latest

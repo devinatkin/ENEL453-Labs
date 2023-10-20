@@ -4,6 +4,9 @@ services:
     build: Dockerfile
     ports:
       - "5000:5000"
+    environment:
+      - PORT=5000
+    
 
   envoy:
     build: Dockerfile.envoy
