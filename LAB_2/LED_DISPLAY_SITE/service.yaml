@@ -12,9 +12,11 @@ spec:
     spec:
       containers:
       - image: gcr.io/atkin-1/enel453_labs_envoy:latest
+        name: envoy
         ports:
           - containerPort: 8080
       - image: gcr.io/atkin-1/enel453_labs:latest
+        name: python-app
         env:
           - name: PORT
             value: "5000"

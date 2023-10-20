@@ -32,5 +32,5 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: python_app
+                address: python-app
                 port_value: 5000
