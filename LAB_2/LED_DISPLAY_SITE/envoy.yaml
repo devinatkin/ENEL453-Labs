@@ -13,7 +13,7 @@ static_resources:
           route_config:
             name: local_route
             virtual_hosts:
-            - name: backend
+            - name: 
               domains: ["*"]
               routes:
               - match: { prefix: "/" }
@@ -30,7 +30,7 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: python-app
+                address: ledsite
                 port_value: 5000
     circuit_breakers:  # Add the circuit_breakers section here
       thresholds:
