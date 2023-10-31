@@ -91,6 +91,11 @@
 !*.py
 !requirements.txt
 !Dockerfile
+!Dockerfile.*
+!docker-compose.yaml
+!envoy.yaml
+!service.yaml
+!README.md
 !*.css
 !*.png
 !*.ico
