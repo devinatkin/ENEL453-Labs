@@ -1,5 +1,6 @@
 import os
 import zipfile
+import csv
 
 def find_files_and_unpack_zip(directory_path):
     """
@@ -55,7 +56,24 @@ def extract_student_info(file_name: str):
         print(f"An exception occurred: {e}")
         return None
 
+    
+def generate_csv(student_marks):
+    """
+    This function takes a dictionary of student names and their corresponding marks, and writes them to a CSV file with the specified fields.
 
+    :param student_marks: A dictionary containing student names as keys and their corresponding marks as values.
+    """
+    with open('student_marks.csv', mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['First Name', 'Last Name', 'Mark'])
+        for first_name,last_name, mark in student_marks:
+            writer.writerow([first_name, last_name, mark])
+
+def run_sv_files(sv_files):
+    """
+    This function takes a list of sv files and runs them through the Vivado simulator.
+    """
+    pass
 
 if __name__ == '__main__':
     find_files_and_unpack_zip("C:\\Users\\devin\\Desktop\\LAB2_DOCUMENTS")
@@ -67,4 +85,29 @@ if __name__ == '__main__':
             student_files[student_name] = []
         student_files[student_name].append(file)
 
-    print(student_files)
+    if os.path.exists("student_marks.csv"):
+        os.remove("student_marks.csv")
+    student_marks = []
+    for student in student_files:
+        if student is None:
+            continue   
+        print(student)
+        student_files[student] = sorted(student_files[student])
+
+        #Grab Just the SV files
+        sv_files = []
+        for file in student_files[student]:
+            if file.endswith('.sv'):
+                sv_files.append(file)
+
+        #Run the SV files
+        run_sv_files(sv_files)
+
+        name_parts = student.split(" ")
+        firstname = name_parts[0]
+        lastname = name_parts[1]
+        mark = 0
+        student_marks.append([firstname, lastname, mark])
+    generate_csv(student_marks)
+
+        
