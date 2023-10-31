@@ -4,6 +4,33 @@ from datetime import datetime
 from collections import defaultdict
 import csv
 import hashlib
+import re
+from datetime import datetime
+
+def calculate_late_days(submission_date_str, due_date):
+    """
+    Calculate the number of late days based on the submission and due dates.
+
+    Parameters:
+        submission_date_str (str): The date of submission in the format "MMM DD, YYYY" (e.g., "Sep 21, 2023").
+        due_date_str (str): The due date in the format "MMM DD, YYYY" (e.g., "Sep 22, 2023").
+
+    Returns:
+        int: The number of late days (0 if the submission is not late).
+    """
+
+    # Define the date format for parsing
+    date_format = "%b %d, %Y"
+    print(submission_date_str)
+    # Convert the date strings to datetime objects
+    submission_date = datetime.strptime(submission_date_str, date_format)
+    
+
+    # Calculate the difference in days between the submission date and the due date
+    delta_days = (submission_date - due_date).days
+
+    # If the submission is late, return the number of late days; otherwise, return 0
+    return max(0, delta_days)
 
 def hash_file(file_path):
     """
@@ -39,7 +66,7 @@ def check_for_identical_files(complete_file_list):
             print(f"Warning: Identical files detected: {file_paths}")
             append_row_to_csv(marking_csv, "Warning", "Identical files detected", file_paths, 0, 0, 0, 0, 0, 0, 0)
 
-def append_row_to_csv(file_path, first_name, last_name, crc_calc, crc_statemachine, tb_crc_calc, tb_crc_statemachine, tb_top_level, top_level, report, score):
+def append_row_to_csv(file_path, first_name, last_name, crc_calc, crc_statemachine, tb_crc_calc, tb_crc_statemachine, tb_top_level, top_level, report, score, note = ""):
     """
     Appends a row to a CSV file with the following fields:
     - first_name
@@ -73,12 +100,12 @@ def append_row_to_csv(file_path, first_name, last_name, crc_calc, crc_statemachi
         # File does not exist, write headers
         with open(file_path, 'w', newline='') as csvfile:
             csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(['first_name', 'last_name', 'crc_calc', 'crc_statemachine', 'tb_crc_calc', 'tb_crc_statemachine', 'tb_top_level', 'top_level', 'report', 'score'])
+            csvwriter.writerow(['first_name', 'last_name', 'crc_calc', 'crc_statemachine', 'tb_crc_calc', 'tb_crc_statemachine', 'tb_top_level', 'top_level', 'report', 'score', 'note'])
     
     # Append the new row
     with open(file_path, 'a', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow([first_name, last_name, crc_calc, crc_statemachine, tb_crc_calc, tb_crc_statemachine, tb_top_level, top_level, report, score])
+        csvwriter.writerow([first_name, last_name, crc_calc, crc_statemachine, tb_crc_calc, tb_crc_statemachine, tb_top_level, top_level, report, score,note])
 
 def clear_csv(file_path):
     """
@@ -89,7 +116,7 @@ def clear_csv(file_path):
     """
     with open(file_path, 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow(['first_name', 'last_name', 'crc_calc', 'crc_statemachine', 'tb_crc_calc', 'tb_crc_statemachine', 'tb_top_level', 'top_level', 'score'])
+        csvwriter.writerow(['first_name', 'last_name', 'crc_calc', 'crc_statemachine', 'tb_crc_calc', 'tb_crc_statemachine', 'tb_top_level', 'top_level', 'report', 'score', 'note'])
 
 def extract_student_info(file_name: str):
     """
@@ -113,7 +140,6 @@ def extract_student_info(file_name: str):
         first_name = names[0]
         last_name = ' '.join(map(str, names[1:]))
         
-
 
         return {
             first_name,
@@ -248,6 +274,32 @@ def check_tb_top_level(files):
                 return 1, f
     return 0, "File not found"
 
+
+def extract_date(input_string):
+    """
+    Extracts the date from a string based on a given pattern.
+
+    Parameters:
+        input_string (str): The string from which to extract the date.
+
+    Returns:
+        str: The extracted date or 'Date not found' if the date is not present in the string.
+    """
+
+    # Define the regular expression pattern to find the date.
+    # The pattern expects a three-letter month abbreviation, followed by a space, 
+    # one or two digits for the day, a comma, a space, and a 4-digit year.
+    date_pattern = r'\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s\d{1,2},\s\d{4}\b'
+    
+    # Search for the date pattern in the input string.
+    match = re.search(date_pattern, input_string)
+    
+    # If a match is found, return the extracted date. Otherwise, return a 'Date not found' message.
+    if match:
+        return match.group(0)
+    else:
+        return 'Date not found'
+
 def check_top_level(files):
     for f in files:
         # Check if the file is a directory
@@ -273,18 +325,21 @@ def check_for_doc_video_files(files):
         if os.path.isdir(f):
             # List all files in the directory and recursively check for document and video files
             directory_files = [os.path.join(f, x) for x in os.listdir(f)]
-            if check_for_doc_video_files(directory_files) == 1:
-                return 1
+            exists, file_name = check_for_doc_video_files(directory_files)
+            if exists == 1:
+                return exists,file_name
         else:
             # Extract the file extension and check if it matches any of the standard extensions
             file_extension = os.path.splitext(f)[1]
             if file_extension.lower() in doc_extensions or file_extension.lower() in video_extensions:
-                return 1
+                return 1,f
                 
-    return 0
+    return 0, "File not found"
 
-lab_name = "C:\\Users\\devin\\Downloads\\Lab 1 Download Oct 16, 2023 733 AM.zip"
+lab_name = "C:\\Users\\devin\\Downloads\\Lab 1 Download Oct 17, 2023 1230 PM.zip"
 extract_files_to = "C:\\Users\\devin\\Downloads"
+due_date = datetime(2023, 10, 4, 0, 0)
+
 marking_csv = "marking.csv"
 file_list = extract_and_list_files(lab_name, extract_files_to)
 # Dictionary to hold students and their submitted files
@@ -297,7 +352,7 @@ for file_name in file_list:
     if info:
         first_name, last_name = info
         key = (first_name, last_name)
-
+        
         # Append the file_name and submission_time as a tuple to the list associated with each student
         students[key].append((file_name))
 
@@ -320,8 +375,48 @@ for key in students.keys():
     tb_crc_statemachine, tb_crc_statemachine_filename = check_tb_crc_statemachine(files)
     tb_top_level, tb_top_level_filename = check_tb_top_level(files)
     top_level, top_level_filename = check_top_level(files)
-    report = check_for_doc_video_files(files)
+    report,report_filename = check_for_doc_video_files(files)
+    note = "No note"
+    from run_verilog_sim import run_verilog_sim, extract_message_and_crc
+    if crc_calc == 1 and tb_crc_calc == 1:
+        verilog_files_for_crc_calc = [crc_calc_filename, tb_crc_calc_filename]
+        output = run_verilog_sim(verilog_files_for_crc_calc, 'tb_CRC_CALC')
+        message, crc = extract_message_and_crc(output)
+        print("------------------------------------")
+        print(f"Message: {message}")
+        print(f"CRC: {crc}")
+        if crc == "FFFF" or crc == "0000":
+            crc_calc = 0
+            tb_crc_calc = 0
+            crc_statemachine = 0 
+            tb_crc_statemachine = 0
+            top_level = 0
+            tb_top_level = 0
+            note = "CRC is not correct (Reset Error)" + f" CRC: {crc} Message: {message}"
+        elif crc == "1898":
+            crc_calc = 0
+            tb_crc_calc = 0
+            crc_statemachine = 0 
+            tb_crc_statemachine = 0
+            top_level = 0
+            tb_top_level = 0
+            note = "CRC is not correct (XMODEM CRC Calculated)" + f" CRC: {crc} Message: {message}"
+        else:
+            note = "The following was the calculated CRC: " + f" CRC: {crc} Message: {message}"
+        print("------------------------------------")
+    
 
+    date_submitted = extract_date(crc_calc_filename) # Basing the date on the crc_calc file
+    days_late = 0
+    if(date_submitted == 'Date not found'):
+        date_submitted = extract_date(crc_statemachine_filename)
+    if(date_submitted != 'Date not found'):
+        days_late = calculate_late_days(date_submitted, due_date)
+        note = note + " Days Late: " + str(days_late)
+        print("Days Late: " + str(days_late))
+    else:
+        note = note + " Date not found"
+        print("Date not found")
     # If all the files are found, add them to the complete_file_list
     if crc_calc == 1 and crc_statemachine == 1 and tb_crc_calc == 1 and tb_crc_statemachine == 1 and tb_top_level == 1 and top_level == 1:
         complete_file_list.extend([crc_calc_filename, crc_statemachine_filename, tb_crc_calc_filename, tb_crc_statemachine_filename, tb_top_level_filename, top_level_filename])
@@ -329,6 +424,7 @@ for key in students.keys():
     system_verilog_filenames = (crc_calc_filename, crc_statemachine_filename, tb_crc_calc_filename, tb_crc_statemachine_filename, tb_top_level_filename, top_level_filename)
 
     score = (crc_calc + crc_statemachine + tb_crc_calc + tb_crc_statemachine + tb_top_level + top_level + report) / 7.0
-    append_row_to_csv(marking_csv, first_name, last_name, crc_calc, crc_statemachine, tb_crc_calc, tb_crc_statemachine, tb_top_level, top_level, report, score)
+    #score = score - (days_late * 0.1)
+    append_row_to_csv(marking_csv, first_name, last_name, crc_calc, crc_statemachine, tb_crc_calc, tb_crc_statemachine, tb_top_level, top_level, report, score,note)
 
 check_for_identical_files(complete_file_list)
