@@ -1,0 +1,7 @@
+PWM Standards for Pulse Width Modulation. This means that the duty cycle of a square wave is being changed over time, this can be simply to dimm an led or for exciting reasons such as communicating information.\\ 
+\vspace{0.5cm}
+\input{Lab_2/pwm_diagram}
+
+\vspace{0.5cm}
+
+Here the duty cycle is changing between 4 different states where 0\% represents the output being fully off, and 100\% represents the output being fully on, and the duty cycles in-between represent being on for a different percentage of the time. The easiest way to create this sort of PWM behavior is to have a counter which increments after each clock cycle until hitting a maximum value and resetting. The duty cycle is set by a number, the output is then 1 while the number is less than or equal to it, and zero when it is above it. 

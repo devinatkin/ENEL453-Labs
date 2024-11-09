@@ -1,0 +1,19 @@
+This is a check list for all of the design feature requirements. Ensure that each of these features is demonstrable within an associated test bench. This list does not include best practices features such as including a synchronous reset; however, that is still a design requirement. \textit{(Remember you need to debounce your buttons!)}
+
+\begin{itemize}
+    \item The design should create a pattern of LEDs on the Basys 3 board. 
+    \item The pattern will be the "Start" signal for the player
+    \item When the button is pressed the time between the start indication and the button press is shown on the 7 segment display in milliseconds. If the score is a new high score the LED's should blink.
+    \item Between presses a high score of the lowest reaction time must be displayed.
+    \item A Creative additional design feature must be included. 
+\end{itemize}
+
+For those of you who don't have any ideas consider implementing one or multiple of the following.
+
+\begin{itemize}
+    \item Take advantage of the Basys 3 USB connection to control the game.
+    \item Display the games output on a monitor via the VGA connection.
+    \item Implement difficulty settings via the switches
+    \item Implement Multi-Modal start signals (Ex. Sound, Light, Vibrations, Computations)
+    \item Complex game mechanics/ features (Numbers of rounds, Win by 2, etc, single-player / multi-player)
+\end{itemize}

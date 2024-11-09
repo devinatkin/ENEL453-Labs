@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\usepackage{tex4ebook}
+\usepackage{ifpdf}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{tikz-timing}
+\usepackage{variables}
+\usepackage{svg}
+\usepackage{amsmath}
+
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
+
+\setlength{\parskip}{\baselineskip}%
+\title{
+  \includegraphics[width=5cm]{Images/Logo.png}\\
+  \normalsize Department of Electrical and Computer Engineering\\
+  ENEL 453: Digital System Design
+}
+
+\date{Fall 2023}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\@title}
+    \vspace{1cm} % Space between title and date, adjust as needed
+    {\@date}
+  \end{center}
+}
+\makeatother
+
+\begin{document}
+\centering
+
+\maketitle
+\large Lab 3: Stop Watch, Timer  \\
+Instruction Manual
+
+\RaggedRight
+\section{Overview}
+\input{Lab_3/overview}
+
+\section{Before You Begin}
+    \subsection{Grading}
+        \input{Lab_3/grades}
+    \subsection{Instructions}
+        \input{Lab_3/before_you_begin}
+
+\section{Timing Reports Reminder}
+    \input{Lab_3/timing_reminder}
+\section{Provided Design Components}
+    \input{Lab_3/provided_design}
+\section{Required Features}
+    \input{Lab_3/required_features}
+\section{Diagramming}
+    \input{Lab_3/diagrams}
+\section{Marking of Submitted Code}
+    \input{Lab_3/marking_submitted_code}
+\section{Playing with your FPGA}
+\input{Lab_3/playtime}
+
+\end{document}

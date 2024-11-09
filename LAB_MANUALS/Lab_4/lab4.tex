@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\usepackage{tex4ebook}
+\usepackage{ifpdf}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{tikz-timing}
+\usepackage{movie15}
+\usepackage{variables}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
+
+
+\setlength{\parskip}{\baselineskip}%
+\title{
+  \includegraphics[width=5cm]{Images/Logo.png}\\
+  \normalsize Department of Electrical and Computer Engineering\\
+  ENEL 453: Digital System Design
+}
+
+\date{Fall 2023}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\@title}
+    \vspace{1cm} % Space between title and date, adjust as needed
+    {\@date}
+  \end{center}
+}
+\makeatother
+
+\begin{document}
+
+\centering
+
+\maketitle
+\large Lab 4: Reaction Time Game  \\
+Instruction Manual
+
+\RaggedRight
+\section{Overview}
+    \input{Lab_4/overview}
+\section{Before You Begin}
+    \subsection{Grading}
+        \input{Lab_4/grades}
+    \subsection{Instructions}
+        \input{Lab_4/before_you_begin}
+\section{Provided Files}
+    \input{Lab_4/provided_design}
+\section{Required Features}
+    \input{Lab_4/required_features}
+\section{Marking}
+    \subsection{Submitted Code}
+        \input{Lab_4/marking_submitted_code}
+    \subsection{Oral Examination}
+        \input{Lab_4/oral_exam_rubric}
+\section{Playing with your FPGA}
+    \input{Lab_4/playtime}
+\end{document}

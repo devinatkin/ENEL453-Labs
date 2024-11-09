@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\usepackage{tex4ebook}
+\usepackage{ifpdf}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{tikz-timing}
+\usepackage{movie15}
+\usepackage{variables}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
+
+
+\setlength{\parskip}{\baselineskip}%
+\title{
+  \includegraphics[width=5cm]{Images/Logo.png}\\
+  \normalsize Department of Electrical and Computer Engineering\\
+  ENEL 453: Digital System Design
+}
+
+\date{Fall 2023}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\@title}
+    \vspace{1cm} % Space between title and date, adjust as needed
+    {\@date}
+  \end{center}
+}
+\makeatother
+
+\begin{document}
+
+\centering
+
+\maketitle
+\large Labs 1, 2, 3, 4: To Long Didn't Read (TLDR)  \\
+
+
+\RaggedRight
+\section{Overview}
+    \input{TLDR/overview}
+\section{Lab 1 TLDR}
+    \input{TLDR/lab1_tldr}
+\section{Lab 2 TLDR}
+    \input{TLDR/lab2_tldr}
+\section{Lab 3 TLDR}
+    \input{TLDR/lab3_tldr}
+\section{Lab 4 TLDR}
+    \input{TLDR/lab4_tldr}
+\end{document}

@@ -1,0 +1,33 @@
+Look at the code in the CRC calculator module you can find code for resetting the CRC register as well as the code that represents the CRC polynomial.
+\begin{lstlisting}
+if (!RESET_N) begin        // Active Low Synchronous Reset
+    |\colorbox{magenta!30}{CRC\_REG <= 16'h0000;}|     // Reset the CRC Register to 0
+    CRC_OUT <= 1'b0;      // Reset the CRC Output to 0
+end else if (READ_MODE) begin
+            CRC_OUT <= CRC_REG[15];
+            CRC_REG <= {CRC_REG[14:0], |\colorbox{magenta!30}{1'b0}|};
+end else ...
+\end{lstlisting}
+The highlighted code resets the register to 0 when the module is reset. This aligns with the XMODEM standard. CDMA2000 gives the register an initial value of all ones. Adjust the code to meet the new standard. Remember to also adjust the value being pushed into the CRC register during read.\\
+\vspace{0.5cm}
+\begin{lstlisting}
+CRC_REG[15] <= CRC_REG[14];
+CRC_REG[14] <= CRC_REG[13];
+CRC_REG[13] <= CRC_REG[12];
+CRC_REG[12] <= |\colorbox{magenta!30}{CRC\_REG[11] {\^{}} CRC\_REG[15]}|;
+CRC_REG[11] <= CRC_REG[10];
+CRC_REG[10] <= CRC_REG[9];
+CRC_REG[9] <= CRC_REG[8];
+CRC_REG[8] <= CRC_REG[7];
+CRC_REG[7] <= CRC_REG[6];
+CRC_REG[6] <= CRC_REG[5];
+CRC_REG[5] <= |\colorbox{magenta!30}{CRC\_REG[4] {\^{}} CRC\_REG[15]}|;
+CRC_REG[4] <= CRC_REG[3];
+CRC_REG[3] <= CRC_REG[2];
+CRC_REG[2] <= CRC_REG[1];
+CRC_REG[1] <= CRC_REG[0];
+CRC_REG[0] <= |\colorbox{magenta!30}{CRC\_REG[15] {\^{}} DATA\_IN}|;
+\end{lstlisting}
+
+This chunk of code is provided for you. You can see overall that it takes the general form of a shift register where each clock cycle shifts the bits over by 1 through the register; however, bit 12, 5, and 0 are different. These are implementing the CRC Polynomial 0x1021 which may also be represented by \(x^{15} + x^{12} + x^{5} + 1\). You can see that the 12th bit, 5th bit, and 0th bit are each exclusively or-ed with the 15th bit when shifting over. Modify the code to match the CRC polynomial of the CDMA2000 standard which is \(x^{15}+x^{14}+x^{11}+x^{6}+x^5 + x^2 +x^1 + 1\). You can copy the pattern from the XMODEM implementation to create an equivalent CDMA2000 implementation.\\
+\vspace{0.5cm}

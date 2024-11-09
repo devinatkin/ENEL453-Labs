@@ -1,0 +1,22 @@
+Clock Dividers are a useful basic circuit within digital logic. The Artix 7 FPGA on board the Basys 3 has a PLL which can be used to generate various clock frequencies, in theory these frequencies can be up to 1.6 GHz. However, practically speaking you will be limited by the Basys 3's on board oscillator (100Mhz) as well as the speeds of the logic on board the FPGA. For this course we will ignore the PLL and use the on-board clock alongside the digital logic to generate the additional clocks that we need.\\
+\vspace{0.5cm}
+In this lab you will need to divide the input 100MHz clock down to produce a roughly 20Hz clock. To do this you will need a clock divider of ~5000000.\\ 
+\vspace{0.5cm}
+Clock Dividers are essentially simple counters and function in a similar manner to PWM Modules. The goal is to count up and change the output from 1 to 0 at the appropriate time so the output is a slower clock which matches the desired speed. If the division is a power of two, this can literally just be a the counter at a specific bit. 
+
+\vspace{0.5cm}
+\begin{tikztimingtable}
+\raggedright
+  CLK & LHLHLHLHLHLHLHLHLHLHLHLHLHLH \\
+  Counter [0]  & LHHLLHHLLHHLLHHLLHHLLHHLLHHL \\
+  Counter [1]  & LLLHHHHLLLLHHHHLLLLHHHHLLLLH \\
+  Counter [2]  & LLLLLLLHHHHHHHHLLLLLLLLHHHHH \\
+  % \extracode
+  % \draw (0,0) circle(0.2pt); % Origin Dot
+  % \begin{pgfonlayer}{background}
+  %   \vertlines[help lines] {0.5,4.5}
+  % \end{pgfonlayer}
+\end{tikztimingtable}
+\vspace{0.5cm}
+
+If you are noticing a similarity to PWM Modules this is good because a PWM module can be used as a clock divider when configured appropriately. This is a great case where carefully written code can allow you to save a substantial amount of time. 

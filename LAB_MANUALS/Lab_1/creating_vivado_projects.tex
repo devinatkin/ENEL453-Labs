@@ -1,0 +1,142 @@
+\subsection{Open Vivado 2023}
+    
+    \ifpdf
+        \begin{figure}[H]
+        Open Vivado and click on Create Project under the quick start menu. 
+
+            \centering
+            \includegraphics[width=5cm]{Images/Vivado_CreateProject.png}
+            \caption{Select Create Project}
+            \label{fig:enter-label}
+        \end{figure}
+    \else
+        \HCode{<video width="320" height="240" controls>
+          <source src="Images/CreateProject_Vivado2023.mp4" type="video/mp4">
+          <img src="Images/Vivado_CreateProject.png" alt="Video Shows the button press for the create project">
+          Your browser does not support the video tag.
+        </video>}
+    \fi
+
+\subsection{Create a New Project}
+    Follow along with the Create a New Project Wizard.\\
+    \vspace{1cm}
+    \includegraphics[width = 1cm]{Images/Alert Icon.png} \textbf{
+    If you are working on the lab computers, ensure your project is saved on your Desktop!
+    This is due to file latency with the H drive preventing tools from behaving correctly.
+    You will need to also ensure you backup your project as the drive gets cleaned intermittently.
+    DO NOT SAVE TO THE TEMP DRIVE as that is shared between users.}
+
+    \vspace{1cm}
+    
+\ifpdf
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{Images/CreateProjectImages/Vivado_CreateProject_Page1.png}
+        \caption{Follow through with create project wizard.}
+        \label{fig:enter-label}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{Images/CreateProjectImages/Vivado_CreateProject_Page2.png}
+        \caption{Give  your project a name.}
+        \label{fig:enter-label}
+        \raggedright
+        \vspace{0.5cm}
+        Use the structure 
+        \textbf{LabX\_FirstName\_LastName}
+        for your project name. The marking will rely on the lab names so variations may cause issues with incorrect marking! 
+    \end{figure}
+
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{Images/CreateProjectImages/Vivado_CreateProject_Page3.png}
+        \caption{Select RTL Project}
+        \label{fig:enter-label}
+        \raggedright
+        Select RTL Project, and check the option to not include sources at this time. You will import the lab code once the project is fully setup.
+
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{Images/CreateProjectImages/Vivado_CreateProject_Page4.png}
+        \caption{Select the FPGA used by the Basys3}
+        \label{fig:enter-label}
+        \raggedright
+        \vspace{0.5cm}
+        The Correct FPGA is xc7a35tcpg236-1. Select the following to narrow the options.
+        \begin{itemize}
+            \item Category: General Purpose
+            \item Family: Artix-7
+            \item Package: cpg236
+            \item Speed: -1
+            \item Of the last 3 items in the list the center one should be correct.
+        \end{itemize}
+    \end{figure}
+    The Basys 3 board uses an Artix-7 FPGA, selecting from the available list it is the xc7a35tcpg236-1. You can either use the search functionality or narrow the selection by choosing the appropriate category, family, package, and speed. Note that there are 3 FPGAs available with this selection, they represent different sizes of the same chip, in a design environment you would want to optimize to fit onto the smallest possible chip to minimize costs. FPGAs are expensive components; however, comparing the price of different models, the cost for the Artix-7 chips varies from ~\$50 to ~\$800. This is strong motivation to optimize your design. 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{Images/CreateProjectImages/Vivado_CreateProject_Page5.png}
+        \caption{Finish the project creation}
+        \label{fig:enter-label}
+    \end{figure}
+    With this you should have everything setup and you can begin the lab. Verify the details listed for the project on this page and press finish to create the project. 
+\else
+    \HCode{<video width="320" height="240" controls>
+    <source src="Images/CreateProject_Vivado2023.mp4" type="video/mp4">
+    <img src="Images/Vivado_CreateProject.png" alt="Video Shows the button press for the create project">
+    Your browser does not support the video tag. (Still need to update this to a new video)
+    </video>}
+\fi
+
+\subsection{Adding Lab Files}
+You now have a project created. You are going to need to add a handful of files to simulate and execute the project provided for this lab. The following files are provided with this lab \textit{Basys3\_Lab1\_Constraints.xdc, top\_level.sv, crc\_calc.sv, crc\_statemachine.sv, tb\_crc\_statemachine.sv, tb\_crc\_calc.sv, and tb\_top\_level.sv}. To add them to the project click on the plus sign in the sources window.
+
+\ifpdf
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{Images/CreateBitstreamImages/Vivado_AddSources1.png}
+        \caption{Press the plus icon to begin adding sources}
+        \label{fig:enter-label}
+        \raggedright
+        \vspace{0.5cm}
+        Press the plus icon to begin adding the provided files to the project. This will bring up the add file wizard which will allow you to add each file in turn or create new files.
+
+    \end{figure}
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{Images/CreateBitstreamImages/Vivado_AddSources_Page1.png}
+        \caption{File Add Wizard}
+        \label{fig:enter-label}
+        \raggedright
+        \vspace{0.5cm}
+            When you press the button the Add sources tool will appear with three options.
+    You'll need to repeat this step three times for the design sources (\textit{top\_level.sv, crc\_calc.sv, crc\_statemachine.sv}), simulation sources (\textit{tb\_top\_level.sv and tb\_crc\_calc.sv, tb\_crc\_statemachine.sv}), and constraints file (\textit{Basys3\_Lab1\_Constraints.xdc}). We'll explain what is in each of these files later.
+
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{Images/CreateBitstreamImages/Vivado_AddSources_Page2.png}
+        \caption{Select Add Files under the Plus}
+        \label{fig:enter-label}
+        \raggedright
+        \vspace{0.5cm}
+        Repeat this process for each option in turn. Hit next, select add files, and select the appropriate design sources, simulation sources, and constraints files respectively. After you have added all the provided files the design should be ready for generating a bitstream. \textbf{In the sources menu ensure that top\_level.sv is selected as the top, it will have 3 small squares next to it \includegraphics[height=4mm]{Images/CreateProjectImages/top_level_3Dots.png}. If it does not right click on the file in the sources menu and select Set as Top. This is the top of the design and will ensure that the bitstream is generated correctly. Vivado will often correctly select the top file when it is being added to the design. It is worth noting that top\_level or top is a fairly ubiquitous standard name for top cells in fpga projects.}
+    \end{figure}
+
+    
+\else
+    \HCode{<video width="320" height="240" controls>
+    <source src="Images/CreateProject_Vivado2023.mp4" type="video/mp4">
+    <img src="Images/Vivado_CreateProject.png" alt="Video Shows the button press for the create project">
+    Your browser does not support the video tag. (Still need to update this to a new video)
+    </video>}
+\fi
+
+\input{Lab_1/synthesis_instructions}
+\input{Lab_1/timing_reports}
+

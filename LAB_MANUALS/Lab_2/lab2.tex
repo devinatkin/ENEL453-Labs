@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tex4ebook}
+\usepackage{ifpdf}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz-timing}[2009/12/09]
+\usepackage{variables}
+\usepackage{movie15}
+\usetikztiminglibrary[new={char=Q,reset char=R}]{counters}
+
+\usepackage{movie15}
+\titleformat{\section}[block]{\normalfont\Large\bfseries\raggedright}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\raggedright}{\thesubsection}{1em}{}
+  [\vspace{1ex}]
+
+\titlespacing*{\subsection}{0pt}{\baselineskip}{\baselineskip}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\raggedright}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{\baselineskip}{\baselineskip}
+
+\lstset{
+  basicstyle=\ttfamily,
+  escapeinside=||
+}
+
+\setlength{\parskip}{\baselineskip}%
+\title{
+  \includegraphics[width=5cm]{Images/Logo.png}\\
+  \normalsize Department of Electrical and Computer Engineering\\
+  ENEL 453: Digital System Design
+}
+
+\date{\semester}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\@title}
+    \vspace{1cm} % Space between title and date, adjust as needed
+    {\@date}
+  \end{center}
+}
+\makeatother
+
+\begin{document}
+\centering
+
+\maketitle
+\large Lab 2: Pulse Width Modulation (PWM) and Clock Dividers  \\
+Instruction Manual
+
+\raggedright
+\normalsize
+\section{Overview}
+\input{Lab_2/overview}
+
+\section{Before You Begin}
+
+    \subsection{Grading}
+\input{Lab_2/grades}
+    \subsection{Instructions}
+\input{Lab_2/before_you_begin}
+
+\section{PWM Explained}
+\input{Lab_2/pwm_explained}
+\section{Clock Divider Explained}
+\input{Lab_2/clk_divider_explained}
+\section{Provided Design}
+\input{Lab_2/provided_design}
+\section{Required Modifications}
+\input{Lab_2/required_modifications}
+\input{Lab_2/steps_to_solution}
+\section{Marking}
+\input{Lab_2/marking}
+\section{Playing with your FPGA}
+\input{Lab_2/playtime}
+\end{document}

@@ -1,0 +1,25 @@
+
+CRC stands for Cyclic Redundancy Check, it is a number which is calculated before transmitting which is appended to the message to allow to reciever to check for errors in the bit pattern. The provided code is implements a CRC check based on the switches. You can see the output by pressing the center button on the Basys 3 and toggling some of the switches. The Leds should change in what appears to be a mostly random pattern. The pattern is the calculated CRC. \\
+
+\vspace{1cm}
+To get a solid understanding of CRC I recommend watching the following videos by Ben Eater explaining the math and hardware of CRC check. The provided code implements the same standard as he implements in his video.
+\begin{itemize}
+    \item How do CRCs work?: \url{https://www.youtube.com/watch?v=izG7qT0EpBw}
+    \item Hardware CRC calculation: \url{https://www.youtube.com/watch?v=sNkERQlK8j8}
+\end{itemize}
+
+The essential idea of a CRC check is that you guarantee your message is divisible by a specific number and then you calculate the remainder to see if the received message is correct. The specific number is typically a large prime number to ensure that it is unlikely the error which occurs results in another valid transmitted message. Selecting a good number is essential, a lab exists which maintains a list of good options for CRC values \url{https://users.ece.cmu.edu/~koopman/crc/index.html}. In our instance XMODEM which is implemented by the provided code uses 4129 which is the 519th prime number. 
+
+While calculating a true CRC is done using XOR operations in binary, for convenience we can see the overall idea by performing the calculations mostly in decimal. We'll send "Hi" using the CRC-16 XMODEM.
+\begin{itemize}
+    \item We first want to look at the binary representation of the text. 01001000 01101001. 
+    \item We are going to want to pad our message with an additional 16-bits to contain the calculated CRC as the final message includes the CRC: 00000000 00000000.
+    \item Then lets look at the decimal representation with the padding: 1214840832.
+    \item Then we are going to want to find the remainder when divided by 4129 (Our prime number): 2323
+    \item If we subtract the remainder from the prime number we get 4129-2323=1806.
+    \item We are then going to add that to our original number to get: 1214842638
+    \item Which in decimal is 1214842638. This number is now evenly divisible by 4129 and is therefore valid. If we transmit this and an error occurs, we can know by checking if the received value is divisible by the agreed upon number (4129).
+    \item If we look at the message in binary you can see the original message is still present: 01001000 01101001 00000111 00001110.
+
+\textbf{This does give a different value than the true CRC but is a overall representation of the math in a decimal format}. True CRC calculation utilizes finite fields, and polynomial division to represent the input and output, turning the CRC calculation from a division into a series of exclusive or operations. 
+\end{itemize}

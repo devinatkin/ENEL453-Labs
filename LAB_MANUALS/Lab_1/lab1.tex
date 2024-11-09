@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\usepackage{tex4ebook}
+\usepackage{ifpdf}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{variables}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
+
+\lstset{
+  basicstyle=\ttfamily,
+  escapeinside=||
+}
+
+\setlength{\parskip}{\baselineskip}%
+\title{
+  \includegraphics[width=5cm]{Images/Logo.png}\\
+  \normalsize Department of Electrical and Computer Engineering\\
+  ENEL 453: Digital System Design
+}
+
+\date{\semester}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\@title}
+    \vspace{1cm} % Space between title and date, adjust as needed
+    {\@date}
+  \end{center}
+}
+\makeatother
+
+\begin{document}
+\centering
+
+\maketitle
+\large Lab 1: Introduction to Simulation, Synthesis and Implementation on an FPGA \\
+\large Instruction Manual
+
+\RaggedRight
+\section{Overview}
+\input{Lab_1/overview}
+\input{Lab_1/grades}
+
+\section{Before You Begin}
+\input{Lab_1/before_you_begin}
+
+\section{Creating Vivado Projects}
+\input{Lab_1/creating_vivado_projects}
+
+\section{Explaining CRC Coding and Modifying the Provided Code}
+\input{Lab_1/explainingCRC}
+\input{Lab_1/Vivado_Simulations}
+\input{Lab_1/requiredModifications}
+\section{Create Bitstream (In the Lab)}
+\input{Lab_1/create_bitstream}
+\input{Lab_1/marking}
+\end{document}

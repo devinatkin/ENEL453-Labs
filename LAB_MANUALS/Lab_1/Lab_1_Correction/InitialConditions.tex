@@ -1,0 +1,28 @@
+\subsection{Modify the Initial Value}
+CRC Initial values are a value which the intitial bits of the message are XOR'd by to produce more reliable behavior. CDMA2000 has an init value of 0xFFFF, this protects it from cases where the data value is zeroed out, which would produce incorrectly valid CRCs for XMODEM. You can see this by feeding in all zero values to the CRC calculator.
+
+Initially when making this lab I set the CRC reg to the initial value and assumed incorrectly that this would result in the correct value regardless of the init used for the specific CRC. This was wrong, and is a simplification that only works for zero as the init value. Some additional hardware is required to produce the correct value for other init values. 
+
+\subsubsection{Add a new CRC Init Register}
+\begin{verbatim}
+    logic [15:0] CRC_INIT;
+\end{verbatim}
+Add this line immediately after the declaration for the original CRC register. 
+
+\subsubsection{Initialize the CRC Init Register to the Appropriate Value}
+\begin{verbatim}
+    CRC_INIT <= 16'hFFFF;
+\end{verbatim}
+Add this line in the reset code to set the CRC Init register when the module is reset. Also add it to the READ\_MODE code to reset the initial value after the module has been used once. 
+
+\subsubsection{Apply the initial value Register}
+\begin{verbatim}
+    CRC_REG[0] <= DATA_IN ^ CRC_REG[15] ^ CRC_INIT[15];
+\end{verbatim}
+Modify your CRC\_REG value to include an XOR with the CRC\_INIT register. For this line we're just going to apply the MSB of the CRC init register. We'll add another line to shift the data over so that all values in the register get applied.
+
+\subsubsection{Shift the initial value Register}
+\begin{verbatim}
+    CRC_INIT <= {CRC_INIT[14:0], 1'b0}; 
+\end{verbatim}
+This shifts over the register values one bit at a time and in-fills zeros into the CRC init register. This means that the first two bytes of the CRC will have their values altered as they enter the shift register, but afterwards they will behave as they did in the original code. 

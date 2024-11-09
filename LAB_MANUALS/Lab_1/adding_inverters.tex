@@ -1,0 +1,77 @@
+
+
+To add the inverter look first at the top level of the design first look at the first at the top level of the design. 
+\begin{lstlisting}
+    module top_level (
+    input CLK,
+    input |\colorbox{magenta!30}{RESET}|,
+    input [15:0] SWITCHES,
+    output [15:0] LEDS
+);
+ 
+    // CRC Output Signal
+    logic CRC_OUT;
+
+    // Data Input Signal for CRC Calculation
+    reg DATA_IN;
+    
+    // Read Mode Signal
+    reg READ_MODE;
+
+    // CRC Module Instance
+    CRC_CALC crc_calc (
+        .CLK(CLK),
+        .|\colorbox{magenta!30}{RESET\_N(RESET)}|,
+        .DATA_IN(DATA_IN),
+        .READ_MODE(READ_MODE),
+        .CRC_OUT(CRC_OUT)
+    );
+
+    // State Machine Instance
+    CRC_Statemachine state_machine (
+        .CLK(CLK),
+        .|\colorbox{magenta!30}{RESET\_N(RESET)}|,
+        .INPUT_CRC(SWITCHES),
+        .OUTPUT_CRC(LEDS),
+        .DATA_IN(DATA_IN),
+        .READ_MODE(READ_MODE),
+        .CRC_OUT(CRC_OUT)
+    );
+
+endmodule
+
+\end{lstlisting}
+Looking at the highlighted resets you can see that the top level reset is active high, while the lower level modules are active low. This means that the design is held in reset continually until reset is pressed where you will start to see outputs. To change this go into the lower level modules and adjust the resets to be active high. \textbf{\*Note that having a mix between RESET\_N and RESET hooking up in the way shown in the provided top module is bad practice, but was done here to demonstrate the mismatch in reset polarities.}\\
+\vspace{0.5cm}
+\begin{lstlisting}
+    
+module CRC_CALC(
+    input CLK,
+    input |\colorbox{magenta!30}{RESET}|,
+    input DATA_IN,
+    input READ_MODE,
+    output reg CRC_OUT
+    );
+    
+    // CRC Register
+    reg [15:0] CRC_REG;
+    
+    // CRC Polynomial (XMODEM) 16'h1021
+    
+    // CRC Calculation
+always @(posedge CLK) begin
+    if (|\colorbox{magenta!30}{RESET}|) begin // Active Synchronous Reset
+    
+        CRC_REG <= 16'h0000; // Reset the CRC Register to 0
+        CRC_OUT <= 1'b0; // Reset the CRC Output to 0
+    end else if (READ_MODE) begin
+        // Read Mode COde
+    end else begin                                             
+        // CRC Calculation Mode Code
+        end
+    end
+ 
+endmodule
+
+\end{lstlisting}
+You can see required changes in the above code. The resets have been adjusted to reflect the need for active high reset on this hardware. You will need to perform these changes on your own code as well as similar changes to the crc state machine module and the associated test benches for each module. 

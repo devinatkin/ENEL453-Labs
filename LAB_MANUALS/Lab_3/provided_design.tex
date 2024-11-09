@@ -1,0 +1,30 @@
+In this lab you are being provided with a half functional design. You can choose to create your own versions of these modules if you would like a challenge; however, if you choose to go this route you must verify your versions to ensure that they function correctly.
+
+You are provided with the following modules:
+\begin{itemize}
+    \item \textit{doubledabble.sv}, This contains a SystemVerilog implementation of the double dabble algorithm which will convert the input binary number to a binary coded decimal representation. This is required for driving the 7 segment displays. 
+    
+    \item \textit{debounce.sv}, This contains a SystemVerilog implementation of button debouncer. This compensates for buttons mechanical properties that results in them repeatedly connecting and disconnecting when pressed. Essentially it acts as a delay to prevent the repeated bounces from registering.
+
+    \item \textit{debounce\_wrapper.sv}, This module contains multiple instantiations of the debounce module. It is intended to keep the top level of the design clean by collecting together multiple near identical instantiations of the debounce module. 
+    
+    \item \textit{sevenseg4ddriver.sv}, this module handles the timing between the four segments of the display on the Basys3. The module takes 4 seven segment inputs along with the system clock and reset, it then drives the seven cathodes and four anodes of the different digits. This was provided because the timing for this component is difficult to verify without a physical board as the FPGA can switch the pins faster than the external driver transistors can switch resulting in the display not functioning correctly.
+    
+    \item \textit{segment\_mux.sv}, a simple state machine which handles the multiplexing of the different digits of the second segment display. This module is contained inside the \textit{sevenseg4ddriver.sv} module.
+    
+    \item \textit{pwm\_module.sv} this is the same PWM module as was used in Lab 2. Here it is used inside the \textit{sevenseg4ddriver.sv} module to produce a slower clock for multiplexing the led segments. 
+    
+    \item \textit{display\_driver.sv} this module integrates the bcd to binary, double dabble, and display multiplexer units into a single cell to keep the higher level cells concise. It takes a minute and second value from the timer module and outputs the correct seven segment anode and cathode values to drive the display.
+    
+    \item \textit{bcd\_binary.sv}, this module takes the 4 bit binary coded decimal and converts it into 7 segment values. This module is contained within the display driver unit. 
+    
+    \item \textit{timer.sv}, this module handles the logic of the timer, recieving input from the debounced buttons and providing an output to the display driver. 
+    
+    \item \textit{time\_counter.sv}, this module handles increment and decrement minutes and seconds. It is used inside the timer module. \textit{I'd recommend reusing this module to produce the stop watch functionality}.
+    
+    \item \textit{blinking\_binary.sv}, this module takes the blink signal and the 1Hz clock to generate a blinking effect on the display.
+
+    \item \textit{clock\_divider.sv} this module produces a clock divider to generate a 1Hz and 1KHz clock for use within the other modules.
+    
+    
+\end{itemize}

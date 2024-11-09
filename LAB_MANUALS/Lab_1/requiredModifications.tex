@@ -1,0 +1,17 @@
+\subsection{Modifications}
+\subsubsection{Adjusting Reset}
+Open top\_level.sv. The provided code uses an active low reset; however, the button on the Basys3 board which it is hooked up to is active high.\\
+\begin{itemize}
+    \item \textbf{Modify the reset polarity in the code}. When you reprogram the board the LEDs should show up without needing to press the center button on the Basys3. 
+\end{itemize}
+\input{Lab_1/adding_inverters}
+
+\subsubsection{Changing to a new CRC Calculation}
+Open crc\_calc.sv. This implements a basic hardware design for performing 16-bit CRC calculations. Open the website: \url{https://crccalc.com/}, look at the 16-bit CRC calculations. Find the CRC-16/XMODEM and the CRC-16/CDMA2000 lines. Examine the differences between the different CRC checks.
+\begin{itemize}
+    \item \textbf{Adjust the initialization value of the CRC register to match the CRC-16/CDMA2000 standard}. You'll want to ensure you can simulate the original design first; however, you can use the provided website to check your answers.
+    \item \textbf{Adjust the CRC Polynomial coded into the design to match the CRC-16/CDMA2000 standard}. Confirm that your output is as expected before submitting the design. A hand diagram can help immensely in ensuring that you don't make any mistakes
+\end{itemize}
+\input{Lab_1/changing_crc}
+\textbf{Do not modify the provided module headers. Your submitted files will be tested against a series of randomized cases to verify that they perform correctly.}
+

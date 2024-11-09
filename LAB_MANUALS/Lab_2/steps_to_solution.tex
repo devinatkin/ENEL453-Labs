@@ -1,0 +1,11 @@
+
+\subsection{Steps to a solution}
+\begin{itemize}
+    \item Create a new low level file, call it: \textit{circular\_shift\_register.sv}.
+    \item This new module should output 16, 8-bit registers. These will be the duty cycles of the PWM modules.
+    \item On reset each of these 8-bit registers should be instantiated with different values: 0,0,0,0,16,32,64,256,256,64,32,16,0,0,0,0 makes for reasonable values.
+    \item On each clock cycle, the registers should shift one over, similar to a shift register; except, the last register shifts into the first register.
+    \item Write a test bench and observe the outputs cycling.
+\end{itemize}
+\input{Lab_2/create_circular_shift_register}
+\input{Lab_2/create_top_level}

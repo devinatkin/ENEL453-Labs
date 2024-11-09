@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\usepackage{tex4ebook}
+\usepackage{ifpdf}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{variables}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
+
+\lstset{
+  basicstyle=\ttfamily,
+  escapeinside=||
+}
+
+\setlength{\parskip}{\baselineskip}%
+\title{
+  \includegraphics[width=5cm]{Images/Logo.png}\\
+  \normalsize Department of Electrical and Computer Engineering\\
+  ENEL 453: Digital System Design
+}
+
+\date{\semester}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\@title}
+    \vspace{1cm} % Space between title and date, adjust as needed
+    {\@date}
+  \end{center}
+}
+\makeatother
+
+\begin{document}
+\centering
+
+\maketitle
+\large Lab 1: Correction \\
+\large Addendum 
+
+\RaggedRight
+\section{CDMA2000}
+In the initial lab document instructions were provided for changing the initial state of the CRC in order to calculate the CDMA2000 CRC which requires that the register have an initial condition of 0xFFFF. However if you follow just the instructions provided you will arrive at the following output for your CRC simulation:
+\begin{verbatim}
+    Original Message: Hello, CRC!
+    Calculated CRC (Hex): 73e8
+\end{verbatim}
+However, this is incorrect as the value should have been: 0x84C5. If you follow along performing the steps one by one, you'll notice the following. 
+
+\begin{itemize}
+    \item Using the following online crc calculator \url{http://www.sunshine2k.de/coding/javascript/crc/crc_js.html} you can verify the initial calculated CRC for XMODEM. 
+    \item If we then change the polynomial but keep the initial conditions as zero we calculate 0x1c99. This matches for both the simulation and for the online calculators. 
+        \begin{verbatim}
+            Original Message: Hello, CRC!
+            Calculated CRC (Hex): 1c99
+        \end{verbatim}  
+    \item If we then change the initial conditions to 0xFFFF in this new calculator we get 0x84C5 which matches the original online calculator. This allows us to limit our investigation of the bug down to just the code relating to the initial values. The initial value instructions were in error. So you should change the reset value for CRC\_REG back to:
+    \begin{verbatim}
+        CRC_REG <= 16'h0000;  // Reset the CRC Register to 0
+    \end{verbatim}
+    and change the fill value back to zero in the read mode like this:
+    \begin{verbatim}
+        // Shift the CRC Register Left by One Bit
+        CRC_REG <= {CRC_REG[14:0], 1'b0}; 
+    \end{verbatim}
+\end{itemize}
+
+There are a few mistakes that combine to produce the incorrect value. The following is how to change the init value to correctly produce the CDMA2000 CRC.
+
+\input{Lab_1/Lab_1_Correction/InitialConditions}
+
+\section{Verification}
+\input{Lab_1/Lab_1_Correction/Verification}
+\end{document}
+
